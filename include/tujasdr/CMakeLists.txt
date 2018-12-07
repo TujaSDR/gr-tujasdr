@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    alsasink.h DESTINATION include/tujasdr
+    alsasink.h
+    alsa_source.h DESTINATION include/tujasdr
 )

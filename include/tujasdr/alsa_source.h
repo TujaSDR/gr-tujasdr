@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_TUJASDR_ALSASINK_H
-#define INCLUDED_TUJASDR_ALSASINK_H
+#ifndef INCLUDED_TUJASDR_ALSA_SOURCE_H
+#define INCLUDED_TUJASDR_ALSA_SOURCE_H
 
 #include <tujasdr/api.h>
 #include <gnuradio/sync_block.h>
@@ -33,17 +33,17 @@ namespace gr {
          * \ingroup tujasdr
          *
          */
-        class TUJASDR_API alsasink : virtual public gr::sync_block
+        class TUJASDR_API alsa_source : virtual public gr::sync_block
         {
         public:
-            typedef boost::shared_ptr<alsasink> sptr;
+            typedef boost::shared_ptr<alsa_source> sptr;
             
             /*!
-             * \brief Return a shared_ptr to a new instance of tujasdr::alsasink.
+             * \brief Return a shared_ptr to a new instance of tujasdr::alsa_source.
              *
-             * To avoid accidental use of raw pointers, tujasdr::alsasink's
+             * To avoid accidental use of raw pointers, tujasdr::alsa_source's
              * constructor is in a private implementation
-             * class. tujasdr::alsasink::make is the public interface for
+             * class. tujasdr::alsa_source::make is the public interface for
              * creating new instances.
              */
             static sptr make(int sampling_rate, const std::string device_name = "");
@@ -52,4 +52,4 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSASINK_H */
+#endif /* INCLUDED_TUJASDR_ALSA_SOURCE_H */

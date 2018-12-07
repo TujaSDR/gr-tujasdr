@@ -22,11 +22,17 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 
-include_directories(${Boost_INCLUDE_DIR})
+include_directories(
+	${Boost_INCLUDE_DIR}
+	${ALSA_INCLUDE_DIR}
+)
+
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND tujasdr_sources
+	alsa.c
     alsasink_impl.cc
+    alsa_source_impl.cc
 )
 
 set(tujasdr_sources "${tujasdr_sources}" PARENT_SCOPE)
@@ -70,6 +76,7 @@ target_link_libraries(
   ${GNURADIO_RUNTIME_LIBRARIES}
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
+  ${ALSA_LIBRARIES}
   gnuradio-tujasdr
 )
 

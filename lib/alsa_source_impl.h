@@ -18,26 +18,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_ALSASINK_IMPL_H
-#define INCLUDED_TUJASDR_ALSASINK_IMPL_H
+#ifndef INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
+#define INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
 
-#include <tujasdr/alsasink.h>
+#include <tujasdr/alsa_source.h>
 
 #include "alsa.h"
-
-// TODO: increase compile warning level
 
 namespace gr {
     namespace tujasdr {
         
-        class alsasink_impl : public alsasink
+        class alsa_source_impl : public alsa_source
         {
         private:
-            // typedef for pointer to class work method
-            typedef int(alsasink::*work_t)(int noutput_items,
-                                            gr_vector_const_void_star &input_items,
-                                            gr_vector_void_star &output_items);
-            
             snd_pcm_t* d_pcm_handle;
             const unsigned int d_periods;
             const unsigned int d_period_frames;
@@ -46,9 +39,10 @@ namespace gr {
             std::vector<float> d_fbuf;
             
         public:
-            alsasink_impl(int sampling_rate, const std::string device_name);
-            ~alsasink_impl();
+            alsa_source_impl(int sampling_rate, const std::string device_name);
+            ~alsa_source_impl();
             
+            // topolgy
             bool check_topology (int ninputs, int noutputs);
             // start stop
             bool start();
@@ -63,4 +57,4 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSASINK_IMPL_H */
+#endif /* INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H */

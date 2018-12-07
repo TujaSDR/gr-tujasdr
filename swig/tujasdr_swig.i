@@ -9,8 +9,11 @@
 
 %{
 #include "tujasdr/alsasink.h"
+#include "tujasdr/alsa_source.h"
 %}
 
 
 %include "tujasdr/alsasink.h"
 GR_SWIG_BLOCK_MAGIC2(tujasdr, alsasink);
+%include "tujasdr/alsa_source.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, alsa_source);

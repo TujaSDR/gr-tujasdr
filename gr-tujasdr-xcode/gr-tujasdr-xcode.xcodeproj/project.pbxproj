@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B1A36E8A21B938FB00FFD0EF /* alsasink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B1A36E8821B938FA00FFD0EF /* alsasink_impl.cc */; };
+		B1A36E8F21B93F3200FFD0EF /* alsa.c in Sources */ = {isa = PBXBuildFile; fileRef = B1A36E8D21B93F3200FFD0EF /* alsa.c */; };
+		B1A36E9321BAD74300FFD0EF /* alsa_source_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B1A36E9121BAD74300FFD0EF /* alsa_source_impl.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,11 @@
 		B1A36E8921B938FA00FFD0EF /* alsasink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsasink_impl.h; path = ../../lib/alsasink_impl.h; sourceTree = "<group>"; };
 		B1A36E8B21B9391100FFD0EF /* alsasink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsasink.h; path = ../../include/tujasdr/alsasink.h; sourceTree = "<group>"; };
 		B1A36E8C21B93DAF00FFD0EF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		B1A36E8D21B93F3200FFD0EF /* alsa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alsa.c; path = ../../lib/alsa.c; sourceTree = "<group>"; };
+		B1A36E8E21B93F3200FFD0EF /* alsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa.h; path = ../../lib/alsa.h; sourceTree = "<group>"; };
+		B1A36E9021BAD74300FFD0EF /* alsa_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_source.h; path = ../../include/tujasdr/alsa_source.h; sourceTree = "<group>"; };
+		B1A36E9121BAD74300FFD0EF /* alsa_source_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsa_source_impl.cc; path = ../../lib/alsa_source_impl.cc; sourceTree = "<group>"; };
+		B1A36E9221BAD74300FFD0EF /* alsa_source_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_source_impl.h; path = ../../lib/alsa_source_impl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +76,14 @@
 		B1A36E8721B938EC00FFD0EF /* alsasink */ = {
 			isa = PBXGroup;
 			children = (
+				B1A36E8D21B93F3200FFD0EF /* alsa.c */,
+				B1A36E8E21B93F3200FFD0EF /* alsa.h */,
+				B1A36E9021BAD74300FFD0EF /* alsa_source.h */,
+				B1A36E9221BAD74300FFD0EF /* alsa_source_impl.h */,
+				B1A36E9121BAD74300FFD0EF /* alsa_source_impl.cc */,
 				B1A36E8B21B9391100FFD0EF /* alsasink.h */,
-				B1A36E8821B938FA00FFD0EF /* alsasink_impl.cc */,
 				B1A36E8921B938FA00FFD0EF /* alsasink_impl.h */,
+				B1A36E8821B938FA00FFD0EF /* alsasink_impl.cc */,
 			);
 			name = alsasink;
 			sourceTree = "<group>";
@@ -132,6 +144,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A36E8F21B93F3200FFD0EF /* alsa.c in Sources */,
+				B1A36E9321BAD74300FFD0EF /* alsa_source_impl.cc in Sources */,
 				B1A36E8A21B938FB00FFD0EF /* alsasink_impl.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +271,7 @@
 				OTHER_CFLAGS = (
 					"-I/usr/local/Cellar/gnuradio/3.7.13.4_1/include",
 					"-I$(PROJECT_DIR)/../include",
+					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -269,6 +284,7 @@
 				OTHER_CFLAGS = (
 					"-I/usr/local/Cellar/gnuradio/3.7.13.4_1/include",
 					"-I$(PROJECT_DIR)/../include",
+					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

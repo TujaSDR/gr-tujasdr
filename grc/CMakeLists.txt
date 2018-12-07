@@ -18,5 +18,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    tujasdr_alsasink.xml DESTINATION share/gnuradio/grc/blocks
+    tujasdr_alsasink.xml
+    tujasdr_alsa_source.xml DESTINATION share/gnuradio/grc/blocks
 )
