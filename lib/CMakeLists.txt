@@ -28,12 +28,14 @@ include_directories(
 )
 
 link_directories(${Boost_LIBRARY_DIRS})
-
 list(APPEND tujasdr_sources
-	alsa.c
-    alsasink_impl.cc
+    alsa.c
+    alsa_sink_impl.cc
     alsa_source_impl.cc
-)
+    mono_sink_impl.cc
+    ssb_rx_impl.cc
+    complex_sum_impl.cc
+    mono_source_impl.cc )
 
 set(tujasdr_sources "${tujasdr_sources}" PARENT_SCOPE)
 if(NOT tujasdr_sources)

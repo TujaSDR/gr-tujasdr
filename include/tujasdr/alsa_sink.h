@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_TUJASDR_ALSA_SOURCE_H
-#define INCLUDED_TUJASDR_ALSA_SOURCE_H
+#ifndef INCLUDED_TUJASDR_ALSA_SINK_H
+#define INCLUDED_TUJASDR_ALSA_SINK_H
 
 #include <tujasdr/api.h>
 #include <gnuradio/sync_block.h>
@@ -29,21 +29,21 @@ namespace gr {
     namespace tujasdr {
         
         /*!
-         * \brief ALSA source for TujaSDR board
+         * \brief ALSA sink for TujaSDR board
          * \ingroup tujasdr
          *
          */
-        class TUJASDR_API alsa_source : virtual public gr::sync_block
+        class TUJASDR_API alsa_sink : virtual public gr::sync_block
         {
         public:
-            typedef boost::shared_ptr<alsa_source> sptr;
+            typedef boost::shared_ptr<alsa_sink> sptr;
             
             /*!
-             * \brief Return a shared_ptr to a new instance of tujasdr::alsa_source.
+             * \brief Return a shared_ptr to a new instance of tujasdr::alsa_sink.
              *
-             * To avoid accidental use of raw pointers, tujasdr::alsa_source's
+             * To avoid accidental use of raw pointers, tujasdr::alsa_sink's
              * constructor is in a private implementation
-             * class. tujasdr::alsa_source::make is the public interface for
+             * class. tujasdr::alsa_sink::make is the public interface for
              * creating new instances.
              */
             static sptr make(unsigned int sample_rate, const std::string device_name = "");
@@ -52,4 +52,4 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSA_SOURCE_H */
+#endif /* INCLUDED_TUJASDR_ALSA_SINK_H */

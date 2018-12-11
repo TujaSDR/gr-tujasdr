@@ -16,8 +16,11 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
-    tujasdr_alsasink.xml
-    tujasdr_alsa_source.xml DESTINATION share/gnuradio/grc/blocks
+    tujasdr_alsa_sink.xml
+    tujasdr_alsa_source.xml
+    tujasdr_mono_sink.xml
+    tujasdr_ssb_rx.xml
+    tujasdr_complex_sum.xml
+    tujasdr_mono_source.xml DESTINATION share/gnuradio/grc/blocks
 )

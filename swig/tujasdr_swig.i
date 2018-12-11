@@ -8,12 +8,25 @@
 %include "tujasdr_swig_doc.i"
 
 %{
-#include "tujasdr/alsasink.h"
+#include "tujasdr/alsa_sink.h"
 #include "tujasdr/alsa_source.h"
+#include "tujasdr/mono_sink.h"
+#include "tujasdr/ssb_rx.h"
+#include "tujasdr/complex_sum.h"
+#include "tujasdr/mono_source.h"
 %}
 
 
-%include "tujasdr/alsasink.h"
-GR_SWIG_BLOCK_MAGIC2(tujasdr, alsasink);
+%include "tujasdr/alsa_sink.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, alsa_sink);
 %include "tujasdr/alsa_source.h"
 GR_SWIG_BLOCK_MAGIC2(tujasdr, alsa_source);
+%include "tujasdr/mono_sink.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, mono_sink);
+%include "tujasdr/ssb_rx.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, ssb_rx);
+%include "tujasdr/complex_sum.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, complex_sum);
+
+%include "tujasdr/mono_source.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, mono_source);

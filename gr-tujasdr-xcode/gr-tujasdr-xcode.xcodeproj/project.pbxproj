@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B1A36E8A21B938FB00FFD0EF /* alsasink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B1A36E8821B938FA00FFD0EF /* alsasink_impl.cc */; };
+		B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */; };
+		B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5B21BE8F4900E09270 /* mono_sink_impl.cc */; };
+		B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5F21BE97DC00E09270 /* ssb_rx_impl.cc */; };
+		B173BA6621BEA30F00E09270 /* complex_sum_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA6421BEA30F00E09270 /* complex_sum_impl.cc */; };
 		B1A36E8F21B93F3200FFD0EF /* alsa.c in Sources */ = {isa = PBXBuildFile; fileRef = B1A36E8D21B93F3200FFD0EF /* alsa.c */; };
 		B1A36E9321BAD74300FFD0EF /* alsa_source_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B1A36E9121BAD74300FFD0EF /* alsa_source_impl.cc */; };
+		B1C5F2C021BFCE2600E7B7CF /* mono_source_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B1C5F2BE21BFCE2600E7B7CF /* mono_source_impl.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,16 +29,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B173BA5721BE81A200E09270 /* alsa_sink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink_impl.h; path = ../../lib/alsa_sink_impl.h; sourceTree = "<group>"; };
+		B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsa_sink_impl.cc; path = ../../lib/alsa_sink_impl.cc; sourceTree = "<group>"; };
+		B173BA5A21BE81AF00E09270 /* alsa_sink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink.h; path = ../../include/tujasdr/alsa_sink.h; sourceTree = "<group>"; };
+		B173BA5B21BE8F4900E09270 /* mono_sink_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mono_sink_impl.cc; path = ../../lib/mono_sink_impl.cc; sourceTree = "<group>"; };
+		B173BA5C21BE8F4900E09270 /* mono_sink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mono_sink_impl.h; path = ../../lib/mono_sink_impl.h; sourceTree = "<group>"; };
+		B173BA5E21BE8F5E00E09270 /* mono_sink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mono_sink.h; path = ../../include/tujasdr/mono_sink.h; sourceTree = "<group>"; };
+		B173BA5F21BE97DC00E09270 /* ssb_rx_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ssb_rx_impl.cc; path = ../../lib/ssb_rx_impl.cc; sourceTree = "<group>"; };
+		B173BA6021BE97DC00E09270 /* ssb_rx_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssb_rx_impl.h; path = ../../lib/ssb_rx_impl.h; sourceTree = "<group>"; };
+		B173BA6221BE97E800E09270 /* ssb_rx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssb_rx.h; path = ../../include/tujasdr/ssb_rx.h; sourceTree = "<group>"; };
+		B173BA6321BEA30700E09270 /* complex_sum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_sum.h; path = ../../include/tujasdr/complex_sum.h; sourceTree = "<group>"; };
+		B173BA6421BEA30F00E09270 /* complex_sum_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = complex_sum_impl.cc; path = ../../lib/complex_sum_impl.cc; sourceTree = "<group>"; };
+		B173BA6521BEA30F00E09270 /* complex_sum_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_sum_impl.h; path = ../../lib/complex_sum_impl.h; sourceTree = "<group>"; };
 		B1A36E7C21B9386200FFD0EF /* gr-tujasdr-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "gr-tujasdr-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1A36E8821B938FA00FFD0EF /* alsasink_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsasink_impl.cc; path = ../../lib/alsasink_impl.cc; sourceTree = "<group>"; };
-		B1A36E8921B938FA00FFD0EF /* alsasink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsasink_impl.h; path = ../../lib/alsasink_impl.h; sourceTree = "<group>"; };
-		B1A36E8B21B9391100FFD0EF /* alsasink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsasink.h; path = ../../include/tujasdr/alsasink.h; sourceTree = "<group>"; };
 		B1A36E8C21B93DAF00FFD0EF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		B1A36E8D21B93F3200FFD0EF /* alsa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alsa.c; path = ../../lib/alsa.c; sourceTree = "<group>"; };
 		B1A36E8E21B93F3200FFD0EF /* alsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa.h; path = ../../lib/alsa.h; sourceTree = "<group>"; };
 		B1A36E9021BAD74300FFD0EF /* alsa_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_source.h; path = ../../include/tujasdr/alsa_source.h; sourceTree = "<group>"; };
 		B1A36E9121BAD74300FFD0EF /* alsa_source_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsa_source_impl.cc; path = ../../lib/alsa_source_impl.cc; sourceTree = "<group>"; };
 		B1A36E9221BAD74300FFD0EF /* alsa_source_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_source_impl.h; path = ../../lib/alsa_source_impl.h; sourceTree = "<group>"; };
+		B1C5F2BE21BFCE2600E7B7CF /* mono_source_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mono_source_impl.cc; path = ../../lib/mono_source_impl.cc; sourceTree = "<group>"; };
+		B1C5F2BF21BFCE2600E7B7CF /* mono_source_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mono_source_impl.h; path = ../../lib/mono_source_impl.h; sourceTree = "<group>"; };
+		B1C5F2C121BFCE4700E7B7CF /* mono_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mono_source.h; path = ../../include/tujasdr/mono_source.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +97,21 @@
 				B1A36E9021BAD74300FFD0EF /* alsa_source.h */,
 				B1A36E9221BAD74300FFD0EF /* alsa_source_impl.h */,
 				B1A36E9121BAD74300FFD0EF /* alsa_source_impl.cc */,
-				B1A36E8B21B9391100FFD0EF /* alsasink.h */,
-				B1A36E8921B938FA00FFD0EF /* alsasink_impl.h */,
-				B1A36E8821B938FA00FFD0EF /* alsasink_impl.cc */,
+				B173BA5A21BE81AF00E09270 /* alsa_sink.h */,
+				B173BA5721BE81A200E09270 /* alsa_sink_impl.h */,
+				B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */,
+				B173BA5E21BE8F5E00E09270 /* mono_sink.h */,
+				B173BA5C21BE8F4900E09270 /* mono_sink_impl.h */,
+				B173BA5B21BE8F4900E09270 /* mono_sink_impl.cc */,
+				B1C5F2C121BFCE4700E7B7CF /* mono_source.h */,
+				B1C5F2BF21BFCE2600E7B7CF /* mono_source_impl.h */,
+				B1C5F2BE21BFCE2600E7B7CF /* mono_source_impl.cc */,
+				B173BA6221BE97E800E09270 /* ssb_rx.h */,
+				B173BA6021BE97DC00E09270 /* ssb_rx_impl.h */,
+				B173BA5F21BE97DC00E09270 /* ssb_rx_impl.cc */,
+				B173BA6321BEA30700E09270 /* complex_sum.h */,
+				B173BA6521BEA30F00E09270 /* complex_sum_impl.h */,
+				B173BA6421BEA30F00E09270 /* complex_sum_impl.cc */,
 			);
 			name = alsasink;
 			sourceTree = "<group>";
@@ -144,9 +172,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B173BA6621BEA30F00E09270 /* complex_sum_impl.cc in Sources */,
+				B1C5F2C021BFCE2600E7B7CF /* mono_source_impl.cc in Sources */,
 				B1A36E8F21B93F3200FFD0EF /* alsa.c in Sources */,
+				B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */,
 				B1A36E9321BAD74300FFD0EF /* alsa_source_impl.cc in Sources */,
-				B1A36E8A21B938FB00FFD0EF /* alsasink_impl.cc in Sources */,
+				B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */,
+				B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

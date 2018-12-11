@@ -22,6 +22,10 @@
 ########################################################################
 install(FILES
     api.h
-    alsasink.h
-    alsa_source.h DESTINATION include/tujasdr
+    alsa_sink.h
+    alsa_source.h
+    mono_sink.h
+    ssb_rx.h
+    complex_sum.h
+    mono_source.h DESTINATION include/tujasdr
 )

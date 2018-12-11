@@ -41,4 +41,4 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-tujasdr)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
-GR_ADD_TEST(qa_alsasink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_alsasink.py)
+GR_ADD_TEST(qa_alsa_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_alsa_sink.py)

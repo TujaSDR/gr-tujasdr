@@ -23,7 +23,7 @@ from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import tujasdr_swig as tujasdr
 
-class qa_alsasink (gr_unittest.TestCase):
+class qa_alsa_sink (gr_unittest.TestCase):
 
     def setUp (self):
         self.tb = gr.top_block ()
@@ -38,4 +38,4 @@ class qa_alsasink (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_alsasink, "qa_alsasink.xml")
+    gr_unittest.run(qa_alsa_sink, "qa_alsa_sink.xml")

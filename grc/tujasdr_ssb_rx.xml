@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
-  <name>alsasink</name>
-  <key>tujasdr_alsasink</key>
+  <name>ssb_rx</name>
+  <key>tujasdr_ssb_rx</key>
   <category>[tujasdr]</category>
   <import>import tujasdr</import>
-  <make>tujasdr.alsasink($sampling_rate, $)</make>
+  <make>tujasdr.ssb_rx($sampling_rate)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name

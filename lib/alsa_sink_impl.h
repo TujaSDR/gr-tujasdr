@@ -18,17 +18,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
-#define INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
+#ifndef INCLUDED_TUJASDR_ALSA_SINK_IMPL_H
+#define INCLUDED_TUJASDR_ALSA_SINK_IMPL_H
 
-#include <tujasdr/alsa_source.h>
+#include <tujasdr/alsa_sink.h>
 
 #include "alsa.h"
+
+// TODO: increase compile warning level
 
 namespace gr {
     namespace tujasdr {
         
-        class alsa_source_impl : public alsa_source
+        class alsa_sink_impl : public alsa_sink
         {
         private:
             snd_pcm_t* d_pcm_handle;
@@ -40,9 +42,9 @@ namespace gr {
             std::vector<int32_t> d_buf;
             
         public:
-            alsa_source_impl(unsigned int sample_rate, const std::string device_name);
-            ~alsa_source_impl();
-            
+            alsa_sink_impl(unsigned int sample_rate, const std::string device_name);
+            ~alsa_sink_impl();
+
             // start stop
             bool start();
             bool stop();
@@ -56,4 +58,4 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H */
+#endif /* INCLUDED_TUJASDR_ALSA_SINK_IMPL_H */

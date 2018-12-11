@@ -10,9 +10,11 @@
 
 /* Try to get an ALSA capture handle */
 snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
+                           unsigned int channels,
                            unsigned int rate,
                            const unsigned int periods,
                            snd_pcm_uframes_t frames,
+                           snd_pcm_format_t format,
                            snd_pcm_stream_t stream) {
     
     snd_pcm_t *pcm_handle = NULL;
@@ -44,10 +46,9 @@ snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
         return NULL;
         //exit(EXIT_FAILURE);
     }
-    
-    unsigned int channels = 2;
-    /* Set number of channels */
-    if ((err = snd_pcm_hw_params_set_channels_near(pcm_handle, hwparams, &channels)) < 0) {
+
+    // Set number of channels
+    if ((err = snd_pcm_hw_params_set_channels(pcm_handle, hwparams, channels)) < 0) {
         fprintf(stderr, "snd_pcm_hw_params_set_channels_near: %s\n", snd_strerror(err));
         return NULL;
         //exit(EXIT_FAILURE);
@@ -55,15 +56,15 @@ snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
     
     /* Set sample format */
     /* Use native format of device to avoid costly conversions */
-    if (snd_pcm_hw_params_set_format(pcm_handle, hwparams, SND_PCM_FORMAT_S32) < 0) {
-        fprintf(stderr, "Error setting format.\n");
+    if (snd_pcm_hw_params_set_format(pcm_handle, hwparams, format) < 0) {
+        fprintf(stderr, "snd_pcm_hw_params_set_format: %s\n", snd_strerror(err));
         return NULL;
         // exit(EXIT_FAILURE);
     }
     
     /* Set sample rate. If the exact rate is not supported exit */
     if (snd_pcm_hw_params_set_rate(pcm_handle, hwparams, rate, 0) < 0) {
-        fprintf(stderr, "Error setting rate.\n");
+        fprintf(stderr, "snd_pcm_hw_params_set_rate: %s\n", snd_strerror(err));
         return NULL;
         exit(EXIT_FAILURE);
     }
@@ -71,14 +72,14 @@ snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
     /* Period size */
     int dir = 0;
     if (snd_pcm_hw_params_set_period_size(pcm_handle, hwparams, frames, dir) < 0) {
-        fprintf(stderr, "Error setting period size.\n");
+        fprintf(stderr, "snd_pcm_hw_params_set_period_size: %s\n", snd_strerror(err));
         return NULL;
         // exit(EXIT_FAILURE);
     }
     
     /* Set number of periods. Periods used to be called fragments. */
     if (snd_pcm_hw_params_set_periods(pcm_handle, hwparams, periods, 0) < 0) {
-        fprintf(stderr, "Error setting periods.\n");
+        fprintf(stderr, "snd_pcm_hw_params_set_periods: %s\n", snd_strerror(err));
         return NULL;
         // exit(EXIT_FAILURE);
     }
@@ -86,7 +87,7 @@ snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
     /* Apply HW parameter settings to */
     /* PCM device and prepare device  */
     if (snd_pcm_hw_params(pcm_handle, hwparams) < 0) {
-        fprintf(stderr, "Error setting HW params.\n");
+        fprintf(stderr, "snd_pcm_hw_params: %s\n", snd_strerror(err));
         return NULL;
         // exit(EXIT_FAILURE);
     }

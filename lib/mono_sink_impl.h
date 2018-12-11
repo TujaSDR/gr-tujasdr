@@ -18,30 +18,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
-#define INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
+#ifndef INCLUDED_TUJASDR_MONO_SINK_IMPL_H
+#define INCLUDED_TUJASDR_MONO_SINK_IMPL_H
 
-#include <tujasdr/alsa_source.h>
+#include <tujasdr/mono_sink.h>
 
 #include "alsa.h"
 
 namespace gr {
     namespace tujasdr {
         
-        class alsa_source_impl : public alsa_source
+        class mono_sink_impl : public mono_sink
         {
         private:
             snd_pcm_t* d_pcm_handle;
-            const unsigned int d_periods;
-            const unsigned int d_period_frames;
             const unsigned int d_channels;
             const unsigned int d_sample_rate;
+            const unsigned int d_periods;
+            const unsigned int d_period_frames;
             const unsigned int d_max_periods_work;
-            std::vector<int32_t> d_buf;
+            std::vector<int16_t> d_buf;
             
         public:
-            alsa_source_impl(unsigned int sample_rate, const std::string device_name);
-            ~alsa_source_impl();
+            mono_sink_impl(int sampling_rate, const std::string device_name);
+            ~mono_sink_impl();
             
             // start stop
             bool start();
@@ -56,4 +56,4 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H */
+#endif /* INCLUDED_TUJASDR_MONO_SINK_IMPL_H */
