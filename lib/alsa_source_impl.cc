@@ -31,7 +31,7 @@ namespace gr {
     namespace tujasdr {
         
         alsa_source::sptr
-        alsa_source::make(unsigned int sample_rate, const std::string device_name)
+        alsa_source::make(unsigned int sample_rate, const std::string& device_name)
         {
             return gnuradio::get_initial_sptr(new alsa_source_impl(sample_rate, device_name));
         }
@@ -39,7 +39,7 @@ namespace gr {
         /*
          * The private constructor
          */
-        alsa_source_impl::alsa_source_impl(unsigned int sample_rate, const std::string device_name)
+        alsa_source_impl::alsa_source_impl(unsigned int sample_rate, const std::string& device_name)
         : d_pcm_handle(nullptr),
         d_periods(4),
         d_period_frames(2048),

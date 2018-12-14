@@ -46,7 +46,7 @@ namespace gr {
              * class. tujasdr::alsa_source::make is the public interface for
              * creating new instances.
              */
-            static sptr make(unsigned int sample_rate, const std::string device_name = "");
+            static sptr make(unsigned int sample_rate, const std::string& device_name = "");
         };
         
     } // namespace tujasdr

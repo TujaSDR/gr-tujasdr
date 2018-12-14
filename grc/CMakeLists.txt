@@ -22,5 +22,7 @@ install(FILES
     tujasdr_mono_sink.xml
     tujasdr_ssb_rx.xml
     tujasdr_complex_sum.xml
-    tujasdr_mono_source.xml DESTINATION share/gnuradio/grc/blocks
+    tujasdr_mono_source.xml
+    tujasdr_opus_encoder_f.xml
+    tujasdr_unix_dgram_sink_b.xml DESTINATION share/gnuradio/grc/blocks
 )

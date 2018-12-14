@@ -40,7 +40,7 @@ namespace gr {
             std::vector<int16_t> d_buf;
             
         public:
-            mono_sink_impl(int sampling_rate, const std::string device_name);
+            mono_sink_impl(unsigned int sample_rate, const std::string device_name);
             ~mono_sink_impl();
             
             // start stop

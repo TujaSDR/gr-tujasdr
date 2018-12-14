@@ -25,6 +25,7 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(
 	${Boost_INCLUDE_DIR}
 	${ALSA_INCLUDE_DIR}
+	${OPUS_INCLUDE_DIR}
 )
 
 link_directories(${Boost_LIBRARY_DIRS})
@@ -35,7 +36,9 @@ list(APPEND tujasdr_sources
     mono_sink_impl.cc
     ssb_rx_impl.cc
     complex_sum_impl.cc
-    mono_source_impl.cc )
+    mono_source_impl.cc
+    opus_encoder_f_impl.cc
+    unix_dgram_sink_b_impl.cc )
 
 set(tujasdr_sources "${tujasdr_sources}" PARENT_SCOPE)
 if(NOT tujasdr_sources)
@@ -79,6 +82,7 @@ target_link_libraries(
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
   ${ALSA_LIBRARIES}
+  ${OPUS_LIBRARIES}
   gnuradio-tujasdr
 )
 

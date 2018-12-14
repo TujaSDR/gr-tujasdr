@@ -27,5 +27,7 @@ install(FILES
     mono_sink.h
     ssb_rx.h
     complex_sum.h
-    mono_source.h DESTINATION include/tujasdr
+    mono_source.h
+    opus_encoder_f.h
+    unix_dgram_sink_b.h DESTINATION include/tujasdr
 )

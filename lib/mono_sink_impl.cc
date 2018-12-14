@@ -31,20 +31,20 @@ namespace gr {
     namespace tujasdr {
         
         mono_sink::sptr
-        mono_sink::make(int sampling_rate, const std::string device_name)
+        mono_sink::make(unsigned int sample_rate, const std::string device_name)
         {
-            return gnuradio::get_initial_sptr(new mono_sink_impl(sampling_rate, device_name));
+            return gnuradio::get_initial_sptr(new mono_sink_impl(sample_rate, device_name));
         }
         
         /*
          * The private constructor
          */
-        mono_sink_impl::mono_sink_impl(int sampling_rate, const std::string device_name)
+        mono_sink_impl::mono_sink_impl(unsigned int sample_rate, const std::string device_name)
         :d_pcm_handle(nullptr),
         d_periods(5),          // reasonable defaults
         d_period_frames(960), // seems to be good defaults
         d_channels(1),
-        d_sample_rate(sampling_rate),
+        d_sample_rate(sample_rate),
         d_max_periods_work(2),
         gr::sync_block("mono_sink",
         gr::io_signature::make(1, 1, sizeof(float)),

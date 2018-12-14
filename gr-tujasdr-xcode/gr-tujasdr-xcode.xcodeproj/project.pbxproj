@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B142FEDA21C3C631004B55F9 /* opus_encoder_f_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FED821C3C631004B55F9 /* opus_encoder_f_impl.cc */; };
+		B142FEDE21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */; };
 		B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */; };
 		B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5B21BE8F4900E09270 /* mono_sink_impl.cc */; };
 		B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5F21BE97DC00E09270 /* ssb_rx_impl.cc */; };
@@ -29,6 +31,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B142FED721C3C631004B55F9 /* opus_encoder_f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_encoder_f.h; path = ../../include/tujasdr/opus_encoder_f.h; sourceTree = "<group>"; };
+		B142FED821C3C631004B55F9 /* opus_encoder_f_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = opus_encoder_f_impl.cc; path = ../../lib/opus_encoder_f_impl.cc; sourceTree = "<group>"; };
+		B142FED921C3C631004B55F9 /* opus_encoder_f_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_encoder_f_impl.h; path = ../../lib/opus_encoder_f_impl.h; sourceTree = "<group>"; };
+		B142FEDB21C3D85E004B55F9 /* unix_dgram_sink_b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unix_dgram_sink_b.h; path = ../../include/tujasdr/unix_dgram_sink_b.h; sourceTree = "<group>"; };
+		B142FEDC21C3D86E004B55F9 /* unix_dgram_sink_b_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unix_dgram_sink_b_impl.h; path = ../../lib/unix_dgram_sink_b_impl.h; sourceTree = "<group>"; };
+		B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unix_dgram_sink_b_impl.cc; path = ../../lib/unix_dgram_sink_b_impl.cc; sourceTree = "<group>"; };
 		B173BA5721BE81A200E09270 /* alsa_sink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink_impl.h; path = ../../lib/alsa_sink_impl.h; sourceTree = "<group>"; };
 		B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsa_sink_impl.cc; path = ../../lib/alsa_sink_impl.cc; sourceTree = "<group>"; };
 		B173BA5A21BE81AF00E09270 /* alsa_sink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink.h; path = ../../include/tujasdr/alsa_sink.h; sourceTree = "<group>"; };
@@ -112,6 +120,12 @@
 				B173BA6321BEA30700E09270 /* complex_sum.h */,
 				B173BA6521BEA30F00E09270 /* complex_sum_impl.h */,
 				B173BA6421BEA30F00E09270 /* complex_sum_impl.cc */,
+				B142FED721C3C631004B55F9 /* opus_encoder_f.h */,
+				B142FED921C3C631004B55F9 /* opus_encoder_f_impl.h */,
+				B142FED821C3C631004B55F9 /* opus_encoder_f_impl.cc */,
+				B142FEDB21C3D85E004B55F9 /* unix_dgram_sink_b.h */,
+				B142FEDC21C3D86E004B55F9 /* unix_dgram_sink_b_impl.h */,
+				B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */,
 			);
 			name = alsasink;
 			sourceTree = "<group>";
@@ -175,9 +189,11 @@
 				B173BA6621BEA30F00E09270 /* complex_sum_impl.cc in Sources */,
 				B1C5F2C021BFCE2600E7B7CF /* mono_source_impl.cc in Sources */,
 				B1A36E8F21B93F3200FFD0EF /* alsa.c in Sources */,
+				B142FEDE21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc in Sources */,
 				B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */,
 				B1A36E9321BAD74300FFD0EF /* alsa_source_impl.cc in Sources */,
 				B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */,
+				B142FEDA21C3C631004B55F9 /* opus_encoder_f_impl.cc in Sources */,
 				B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +320,7 @@
 					"-I/usr/local/Cellar/gnuradio/3.7.13.4_1/include",
 					"-I$(PROJECT_DIR)/../include",
 					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
+					"-I/usr/local/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -317,6 +334,7 @@
 					"-I/usr/local/Cellar/gnuradio/3.7.13.4_1/include",
 					"-I$(PROJECT_DIR)/../include",
 					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
+					"-I/usr/local/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

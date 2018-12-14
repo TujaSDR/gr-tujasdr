@@ -136,6 +136,7 @@ endif()
 ########################################################################
 
 pkg_search_module(ALSA alsa REQUIRED)
+pkg_search_module(OPUS opus REQUIRED)
 
 ########################################################################
 # Setup doxygen option

@@ -46,6 +46,8 @@ namespace gr {
              * class. tujasdr::alsa_sink::make is the public interface for
              * creating new instances.
              */
+            // TODO: change string to by reference
+            // TODO: change name of blocks to reflect type
             static sptr make(unsigned int sample_rate, const std::string device_name = "");
         };
         

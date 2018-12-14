@@ -19,11 +19,11 @@
  */
 
 
-#ifndef INCLUDED_TUJASDR_MONO_SOURCE_H
-#define INCLUDED_TUJASDR_MONO_SOURCE_H
+#ifndef INCLUDED_TUJASDR_OPUS_ENCODER_F_H
+#define INCLUDED_TUJASDR_OPUS_ENCODER_F_H
 
 #include <tujasdr/api.h>
-#include <gnuradio/sync_block.h>
+#include <gnuradio/block.h>
 
 namespace gr {
     namespace tujasdr {
@@ -33,24 +33,23 @@ namespace gr {
          * \ingroup tujasdr
          *
          */
-        class TUJASDR_API mono_source : virtual public gr::sync_block
+        class TUJASDR_API opus_encoder_f : virtual public gr::block
         {
         public:
-            typedef boost::shared_ptr<mono_source> sptr;
+            typedef boost::shared_ptr<opus_encoder_f> sptr;
             
             /*!
-             * \brief Return a shared_ptr to a new instance of tujasdr::mono_source.
+             * \brief Return a shared_ptr to a new instance of tujasdr::opus_encoder_f.
              *
-             * To avoid accidental use of raw pointers, tujasdr::mono_source's
+             * To avoid accidental use of raw pointers, tujasdr::opus_encoder_f's
              * constructor is in a private implementation
-             * class. tujasdr::mono_source::make is the public interface for
+             * class. tujasdr::opus_encoder_f::make is the public interface for
              * creating new instances.
              */
-            static sptr make(unsigned int sample_rate, const std::string device_name = "");
+            static sptr make(unsigned int sample_rate, unsigned int channels = 1);
         };
         
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_MONO_SOURCE_H */
-
+#endif /* INCLUDED_TUJASDR_OPUS_ENCODER_F_H */
