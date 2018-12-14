@@ -38,10 +38,6 @@ namespace gr {
             gr::analog::agc2_cc::sptr d_agc2;
             gr::filter::fft_filter_ccc::sptr d_fft_filter;
             
-            // rotates a real prototype filter in the freq domain and return a
-            // complex filter
-            std::vector<gr_complex> rotate(std::vector<float> q, float offset);
-            
         public:
             ssb_rx_impl(float sample_rate);
             ~ssb_rx_impl();

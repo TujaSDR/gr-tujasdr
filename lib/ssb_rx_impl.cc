@@ -47,10 +47,17 @@ namespace gr {
                         gr::io_signature::make(1, 1, sizeof(gr_complex)))
         {
             // Create a prototype filter
-            std::vector<float> q = gr::filter::firdes::low_pass(1.0, d_sample_rate, 1500., 100.0);
+            //std::vector<float> q = gr::filter::firdes::low_pass(1.0, d_sample_rate, 1500., 100.0);
+            
+            std::vector<gr_complex> Q =
+            gr::filter::firdes::complex_band_pass(1.0,
+                                                  d_sample_rate, 300.,
+                                                  3300.,
+                                                  100.0);
             
             // Create FFT filter
-            d_fft_filter = gr::filter::fft_filter_ccc::make(1, rotate(q, 1700.));
+            //d_fft_filter = gr::filter::fft_filter_ccc::make(1, rotate(q, 1700.));
+            d_fft_filter = gr::filter::fft_filter_ccc::make(1, Q);
             // Create AGC
             d_agc2 = gr::analog::agc2_cc::make(5e-1, 1e-2, 0.2, 10.0);
             
@@ -61,20 +68,6 @@ namespace gr {
             connect(d_fft_filter, 0, d_agc2, 0);
             connect(d_agc2, 0, d_complex_sum, 0);
             connect(d_complex_sum, 0, self(), 0);
-        }
-        
-        std::vector<gr_complex>
-        ssb_rx_impl::rotate(std::vector<float> q, float offset) {
-            gr::blocks::rotator rotator;
-            // Convert to complex
-            std::vector<gr_complex> Q(q.begin(), q.end());
-            std::vector<gr_complex> Qs(Q.size());
-            // Init rotator
-            double f = 2 * M_PI * offset / d_sample_rate;
-            rotator.set_phase_incr(gr_complex(std::cos(f), std::sin(f)));
-            rotator.rotateN(Qs.data(), Q.data(), static_cast<int>(Q.size()));
-            
-            return Qs;
         }
         
         /*
