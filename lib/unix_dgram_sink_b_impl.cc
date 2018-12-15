@@ -72,23 +72,23 @@ namespace gr {
                                      gr_vector_void_star &output_items)
         {
             const unsigned char *in = (const unsigned char *) input_items[0];
-
+            
             // printf("in: %d out %d\n", ninput_items[0], noutput_items);
             
             // No blocking
             // We prefer packet loss to blocking
             ssize_t err;
             err = sendto(d_socketd,
-                                 in,
-                                 (size_t)ninput_items[0],
-                                 MSG_DONTWAIT, // don't block flag
-                                 (struct sockaddr *)&d_socketname,
-                                 sizeof(struct sockaddr_un));
+                         in,
+                         (size_t)ninput_items[0],
+                         MSG_DONTWAIT, // don't block flag
+                         (struct sockaddr *)&d_socketname,
+                         sizeof(struct sockaddr_un));
             
             if(err < 0) {
-                perror("sending datagram message");
+                // perror("sending datagram message");
             }
-
+            
             // Tell runtime system how many output items we consumed.
             // Should be 0 because we are sinking.
             return noutput_items;

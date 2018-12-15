@@ -59,14 +59,15 @@ namespace gr {
             //d_fft_filter = gr::filter::fft_filter_ccc::make(1, rotate(q, 1700.));
             d_fft_filter = gr::filter::fft_filter_ccc::make(1, Q);
             // Create AGC
-            d_agc2 = gr::analog::agc2_cc::make(5e-1, 1e-2, 0.2, 10.0);
+            //d_agc2 = gr::analog::agc2_cc::make(5e-1, 1e-2, 0.1, 10.0);
+            d_agc3 = gr::analog::agc3_cc::make(1e-1, 1e-2, 0.45, 1.0);
             
             d_complex_sum = gr::tujasdr::complex_sum::make(1);
             
             // connect other blocks
             connect(self(), 0, d_fft_filter, 0);
-            connect(d_fft_filter, 0, d_agc2, 0);
-            connect(d_agc2, 0, d_complex_sum, 0);
+            connect(d_fft_filter, 0, d_agc3, 0);
+            connect(d_agc3, 0, d_complex_sum, 0);
             connect(d_complex_sum, 0, self(), 0);
         }
         

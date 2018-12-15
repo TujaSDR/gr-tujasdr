@@ -97,7 +97,8 @@ namespace gr {
         {
             gr_complex *out = (gr_complex *) output_items[0];
             
-            const float scaling_factor = 4294967294.; // S32 = 2^(32-1)-1
+            //const float scaling_factor = 4294967294.; // S32 = 2^(32-1)-1
+            const float scaling_factor = 2147483647.;
             snd_pcm_sframes_t n_err;
             
             //printf("read\n");
@@ -122,7 +123,7 @@ namespace gr {
             
             // Ok we have read the data, convert it and write it to output buffer
             // Again, 2*noutput_items because there are two samples / frame.
-            volk_32i_s32f_convert_32f((float*) out, d_buf.data(), 4294967294., 2 * noutput_items);
+            volk_32i_s32f_convert_32f((float*) out, d_buf.data(), scaling_factor, 2 * noutput_items);
             
             // Tell runtime system how many output items we produced.
             return noutput_items;

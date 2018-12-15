@@ -24,6 +24,7 @@
 #include <tujasdr/ssb_rx.h>
 #include <tujasdr/complex_sum.h>
 #include <gnuradio/analog/agc2_cc.h>
+#include <gnuradio/analog/agc3_cc.h>
 #include <gnuradio/filter/fft_filter_ccc.h>
 
 namespace gr {
@@ -35,7 +36,8 @@ namespace gr {
             float d_sample_rate;
             
             gr::tujasdr::complex_sum::sptr d_complex_sum;
-            gr::analog::agc2_cc::sptr d_agc2;
+            // gr::analog::agc2_cc::sptr d_agc2;
+            gr::analog::agc3_cc::sptr d_agc3;
             gr::filter::fft_filter_ccc::sptr d_fft_filter;
             
         public:

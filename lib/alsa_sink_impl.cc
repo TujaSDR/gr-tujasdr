@@ -103,7 +103,7 @@ namespace gr {
             // One complex input
             const gr_complex *in = (const gr_complex *) input_items[0];
             
-            const float scaling_factor = 4294967294.; // S32 = 2^(32-1)-1
+            const float scaling_factor = 2147483647.; // S32 = 2^(32-1)-1
             snd_pcm_sframes_t n_err;
             // printf("alsa_sink_impl::work: %d\n", noutput_items);
             
