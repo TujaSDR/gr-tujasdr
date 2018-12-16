@@ -16,6 +16,7 @@
 #include "tujasdr/mono_source.h"
 #include "tujasdr/opus_encoder_f.h"
 #include "tujasdr/unix_dgram_sink_b.h"
+#include "tujasdr/complex_to_mag_squared_log_vcb.h"
 %}
 
 
@@ -36,3 +37,5 @@ GR_SWIG_BLOCK_MAGIC2(tujasdr, mono_source);
 GR_SWIG_BLOCK_MAGIC2(tujasdr, opus_encoder_f);
 %include "tujasdr/unix_dgram_sink_b.h"
 GR_SWIG_BLOCK_MAGIC2(tujasdr, unix_dgram_sink_b);
+%include "tujasdr/complex_to_mag_squared_log_vcb.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, complex_to_mag_squared_log_vcb);

@@ -40,7 +40,7 @@ namespace gr {
          * The private constructor
          */
         mono_source_impl::mono_source_impl(unsigned int sample_rate, const std::string device_name)
-        :d_pcm_handle(nullptr),
+        :d_pcm_handle(NULL),
         d_periods(5),         // reasonable defaults
         d_period_frames(960), // seems to be good defaults
         d_channels(1),
@@ -58,8 +58,9 @@ namespace gr {
                                            SND_PCM_FORMAT_S16,
                                            SND_PCM_STREAM_CAPTURE);
             
-            if (d_pcm_handle == nullptr)
+            if (d_pcm_handle == NULL) {
                 throw std::runtime_error("alsa_pcm_handle");
+            }
             
             // Handle at most 2 periods at a time
             d_buf.resize(d_period_frames * d_max_periods_work);

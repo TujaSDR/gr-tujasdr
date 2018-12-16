@@ -29,5 +29,6 @@ install(FILES
     complex_sum.h
     mono_source.h
     opus_encoder_f.h
-    unix_dgram_sink_b.h DESTINATION include/tujasdr
+    unix_dgram_sink_b.h
+    complex_to_mag_squared_log_vcb.h DESTINATION include/tujasdr
 )

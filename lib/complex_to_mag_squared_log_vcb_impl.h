@@ -18,35 +18,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
-#define INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
+#ifndef INCLUDED_TUJASDR_COMPLEX_TO_MAG_SQUARED_LOG_VCB_IMPL_H
+#define INCLUDED_TUJASDR_COMPLEX_TO_MAG_SQUARED_LOG_VCB_IMPL_H
 
-#include <tujasdr/alsa_source.h>
-
-#include "alsa.h"
+#include <tujasdr/complex_to_mag_squared_log_vcb.h>
 
 namespace gr {
     namespace tujasdr {
         
-        class alsa_source_impl : public alsa_source
+        class complex_to_mag_squared_log_vcb_impl : public complex_to_mag_squared_log_vcb
         {
         private:
-            snd_pcm_t* d_pcm_handle;
-            const unsigned int d_periods;
-            const unsigned int d_period_frames;
-            const unsigned int d_channels;
-            const unsigned int d_sample_rate;
-            const unsigned int d_max_periods_work;
-            // TODO: use volk malloc?
-            std::vector<int32_t> d_buf;
+            size_t d_vlen;
+            size_t d_alignment;
+            float *d_mag_squared;
+            float *d_log2;
             
         public:
-            alsa_source_impl(unsigned int sample_rate, const std::string& device_name);
-            ~alsa_source_impl();
-            
-            // start stop
-            bool start();
-            bool stop();
+            complex_to_mag_squared_log_vcb_impl(size_t vlen);
+            ~complex_to_mag_squared_log_vcb_impl();
             
             // Where all the action really happens
             int work(int noutput_items,
@@ -57,4 +47,5 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H */
+#endif /* INCLUDED_TUJASDR_COMPLEX_TO_MAG_SQUARED_LOG_VCB_IMPL_H */
+

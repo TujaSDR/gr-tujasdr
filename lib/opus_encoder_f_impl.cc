@@ -44,15 +44,14 @@ namespace gr {
         d_frame_size(960),
         d_max_data_bytes(4000),
         d_opus_application(OPUS_APPLICATION_AUDIO),
-        d_packet_len_key{pmt::string_to_symbol("packet_len")},
         gr::block("opus_encoder_f",
                        gr::io_signature::make(1, 1, sizeof(float)),
                        gr::io_signature::make(1, 1, sizeof(unsigned char)))
         {
             int err = 0;
-            
-            //d_packet_len_key = pmt::string_to_symbol("opus_packet_len");
-            //d_buf.resize(d_max_data_bytes);
+
+            // TODO: how to put in init list?
+            d_packet_len_key = pmt::string_to_symbol("packet_len");
             
             // create opus encoder
             d_opus_enc = opus_encoder_create(d_sample_rate, d_channels, d_opus_application, &err);

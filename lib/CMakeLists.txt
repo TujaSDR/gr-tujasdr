@@ -38,7 +38,8 @@ list(APPEND tujasdr_sources
     complex_sum_impl.cc
     mono_source_impl.cc
     opus_encoder_f_impl.cc
-    unix_dgram_sink_b_impl.cc )
+    unix_dgram_sink_b_impl.cc
+    complex_to_mag_squared_log_vcb_impl.cc )
 
 set(tujasdr_sources "${tujasdr_sources}" PARENT_SCOPE)
 if(NOT tujasdr_sources)

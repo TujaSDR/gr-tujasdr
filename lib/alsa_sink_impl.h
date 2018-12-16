@@ -39,6 +39,7 @@ namespace gr {
             const unsigned int d_channels;
             const unsigned int d_sample_rate;
             const unsigned int d_max_periods_work;
+            // TODO: use volk malloc instead??
             std::vector<int32_t> d_buf;
             
         public:

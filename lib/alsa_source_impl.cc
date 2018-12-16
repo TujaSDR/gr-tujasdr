@@ -40,7 +40,7 @@ namespace gr {
          * The private constructor
          */
         alsa_source_impl::alsa_source_impl(unsigned int sample_rate, const std::string& device_name)
-        : d_pcm_handle(nullptr),
+        : d_pcm_handle(NULL),
         d_periods(4),
         d_period_frames(2048),
         d_channels(2),
@@ -58,8 +58,9 @@ namespace gr {
                                            SND_PCM_FORMAT_S32,
                                            SND_PCM_STREAM_CAPTURE);
             
-            if (d_pcm_handle == nullptr)
+            if (d_pcm_handle == NULL) {
                 throw std::runtime_error("alsa_pcm_handle");
+            }
             
             // x2 because of complex input
             d_buf.resize(d_period_frames * d_max_periods_work * 2);

@@ -24,5 +24,6 @@ install(FILES
     tujasdr_complex_sum.xml
     tujasdr_mono_source.xml
     tujasdr_opus_encoder_f.xml
-    tujasdr_unix_dgram_sink_b.xml DESTINATION share/gnuradio/grc/blocks
+    tujasdr_unix_dgram_sink_b.xml
+    tujasdr_complex_to_mag_squared_log_vcb.xml DESTINATION share/gnuradio/grc/blocks
 )

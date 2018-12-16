@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B142FEDA21C3C631004B55F9 /* opus_encoder_f_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FED821C3C631004B55F9 /* opus_encoder_f_impl.cc */; };
 		B142FEDE21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */; };
+		B142FEE121C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FEDF21C587C0004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc */; };
 		B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */; };
 		B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5B21BE8F4900E09270 /* mono_sink_impl.cc */; };
 		B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5F21BE97DC00E09270 /* ssb_rx_impl.cc */; };
@@ -37,6 +38,9 @@
 		B142FEDB21C3D85E004B55F9 /* unix_dgram_sink_b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unix_dgram_sink_b.h; path = ../../include/tujasdr/unix_dgram_sink_b.h; sourceTree = "<group>"; };
 		B142FEDC21C3D86E004B55F9 /* unix_dgram_sink_b_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unix_dgram_sink_b_impl.h; path = ../../lib/unix_dgram_sink_b_impl.h; sourceTree = "<group>"; };
 		B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unix_dgram_sink_b_impl.cc; path = ../../lib/unix_dgram_sink_b_impl.cc; sourceTree = "<group>"; };
+		B142FEDF21C587C0004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = complex_to_mag_squared_log_vcb_impl.cc; path = ../../lib/complex_to_mag_squared_log_vcb_impl.cc; sourceTree = "<group>"; };
+		B142FEE021C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_to_mag_squared_log_vcb_impl.h; path = ../../lib/complex_to_mag_squared_log_vcb_impl.h; sourceTree = "<group>"; };
+		B142FEE221C587ED004B55F9 /* complex_to_mag_squared_log_vcb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_to_mag_squared_log_vcb.h; path = ../../include/tujasdr/complex_to_mag_squared_log_vcb.h; sourceTree = "<group>"; };
 		B173BA5721BE81A200E09270 /* alsa_sink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink_impl.h; path = ../../lib/alsa_sink_impl.h; sourceTree = "<group>"; };
 		B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsa_sink_impl.cc; path = ../../lib/alsa_sink_impl.cc; sourceTree = "<group>"; };
 		B173BA5A21BE81AF00E09270 /* alsa_sink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink.h; path = ../../include/tujasdr/alsa_sink.h; sourceTree = "<group>"; };
@@ -126,6 +130,9 @@
 				B142FEDB21C3D85E004B55F9 /* unix_dgram_sink_b.h */,
 				B142FEDC21C3D86E004B55F9 /* unix_dgram_sink_b_impl.h */,
 				B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */,
+				B142FEE221C587ED004B55F9 /* complex_to_mag_squared_log_vcb.h */,
+				B142FEE021C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.h */,
+				B142FEDF21C587C0004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc */,
 			);
 			name = alsasink;
 			sourceTree = "<group>";
@@ -186,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B142FEE121C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc in Sources */,
 				B173BA6621BEA30F00E09270 /* complex_sum_impl.cc in Sources */,
 				B1C5F2C021BFCE2600E7B7CF /* mono_source_impl.cc in Sources */,
 				B1A36E8F21B93F3200FFD0EF /* alsa.c in Sources */,

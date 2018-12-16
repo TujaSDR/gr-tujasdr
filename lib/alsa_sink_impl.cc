@@ -41,7 +41,7 @@ namespace gr {
          * The private constructor
          */
         alsa_sink_impl::alsa_sink_impl(unsigned int sample_rate, const std::string device_name)
-        : d_pcm_handle(nullptr),
+        : d_pcm_handle(NULL),
         d_periods(4),          // reasonable defaults
         d_period_frames(2048), // seems to be good defaults
         d_channels(2),
@@ -59,8 +59,9 @@ namespace gr {
                                            SND_PCM_FORMAT_S32,
                                            SND_PCM_STREAM_PLAYBACK);
             
-            if (d_pcm_handle == nullptr)
+            if (d_pcm_handle == NULL) {
                 throw std::runtime_error("alsa_pcm_handle");
+            }
             
             // Complex data 2 samples per frame
             d_buf.resize(d_period_frames * 2 * 2);
