@@ -2,6 +2,12 @@
 
 GNURadio blocks for TujaSDR trx
 
+## cross compile
+
+```bash
+cmake -DENABLE_DOXYGEN=OFF -DCMAKE_TOOLCHAIN_FILE=$HOME/src/rbpi3.cmake ../
+```
+
 ## blocks
 
 ### alsa_sink and alsa_source

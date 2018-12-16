@@ -48,7 +48,13 @@ if(NOT tujasdr_sources)
 endif(NOT tujasdr_sources)
 
 add_library(gnuradio-tujasdr SHARED ${tujasdr_sources})
-target_link_libraries(gnuradio-tujasdr ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
+target_link_libraries(
+  gnuradio-tujasdr
+  ${ALSA_LIBRARIES}
+  ${OPUS_LIBRARIES}
+  ${Boost_LIBRARIES}
+  ${GNURADIO_ALL_LIBRARIES}
+)
 set_target_properties(gnuradio-tujasdr PROPERTIES DEFINE_SYMBOL "gnuradio_tujasdr_EXPORTS")
 
 if(APPLE)
@@ -66,28 +72,28 @@ GR_LIBRARY_FOO(gnuradio-tujasdr RUNTIME_COMPONENT "tujasdr_runtime" DEVEL_COMPON
 ########################################################################
 # Build and register unit test
 ########################################################################
-include(GrTest)
+# include(GrTest)
 
-include_directories(${CPPUNIT_INCLUDE_DIRS})
+# include_directories(${CPPUNIT_INCLUDE_DIRS})
 
-list(APPEND test_tujasdr_sources
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_tujasdr.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/qa_tujasdr.cc
-)
+# list(APPEND test_tujasdr_sources
+#     ${CMAKE_CURRENT_SOURCE_DIR}/test_tujasdr.cc
+#     ${CMAKE_CURRENT_SOURCE_DIR}/qa_tujasdr.cc
+# )
 
-add_executable(test-tujasdr ${test_tujasdr_sources})
+# add_executable(test-tujasdr ${test_tujasdr_sources})
 
-target_link_libraries(
-  test-tujasdr
-  ${GNURADIO_RUNTIME_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${CPPUNIT_LIBRARIES}
-  ${ALSA_LIBRARIES}
-  ${OPUS_LIBRARIES}
-  gnuradio-tujasdr
-)
+# target_link_libraries(
+#   test-tujasdr
+#   ${GNURADIO_RUNTIME_LIBRARIES}
+#   ${Boost_LIBRARIES}
+#   ${CPPUNIT_LIBRARIES}
+#   ${ALSA_LIBRARIES}
+#   ${OPUS_LIBRARIES}
+#   gnuradio-tujasdr
+# )
 
-GR_ADD_TEST(test_tujasdr test-tujasdr)
+# GR_ADD_TEST(test_tujasdr test-tujasdr)
 
 ########################################################################
 # Print summary
