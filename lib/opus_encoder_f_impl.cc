@@ -96,7 +96,7 @@ namespace gr {
                 throw std::runtime_error(opus_strerror(n_err));
             }
             
-            printf("opus packet %d\n", n_err);
+            //printf("opus packet %d\n", n_err);
             
             // apply packet len tag
             add_item_tag(0, nitems_written(0),

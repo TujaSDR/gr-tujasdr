@@ -2,8 +2,9 @@ SET(CMAKE_SYSTEM_NAME Linux)
 
 SET(CMAKE_SYSTEM_VERSION 1)
 
-set(CMAKE_C_FLAGS "-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -funsafe-math-optimizations")
-set(CMAKE_CXX_FLAGS "-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -funsafe-math-optimizations")
+# rbpi3
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -funsafe-math-optimizations")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -funsafe-math-optimizations")
 
 SET(CMAKE_C_COMPILER arm-linux-gnueabihf-gcc)
 SET(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)

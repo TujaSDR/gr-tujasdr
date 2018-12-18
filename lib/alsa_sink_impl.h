@@ -40,7 +40,8 @@ namespace gr {
             const unsigned int d_sample_rate;
             const unsigned int d_max_periods_work;
             // TODO: use volk malloc instead??
-            std::vector<int32_t> d_buf;
+            int32_t *d_buf;
+            //std::vector<int32_t> d_buf;
             
         public:
             alsa_sink_impl(unsigned int sample_rate, const std::string device_name);

@@ -45,9 +45,9 @@ namespace gr {
                          gr::io_signature::make(1, 1, vlen * sizeof(gr_complex)),
                          gr::io_signature::make(1, 1, vlen * sizeof(unsigned char)))
         {
-            d_alignment = volk_get_alignment();
-            d_mag_squared = (float*)volk_malloc(sizeof(float)*d_vlen, d_alignment);
-            d_log2 = (float*)volk_malloc(sizeof(float)*d_vlen, d_alignment);
+            size_t alignment = volk_get_alignment();
+            d_mag_squared = (float*)volk_malloc(sizeof(float)*d_vlen, alignment);
+            d_log2 = (float*)volk_malloc(sizeof(float)*d_vlen, alignment);
             
             /*
             unsigned int alignment = volk_get_alignment();

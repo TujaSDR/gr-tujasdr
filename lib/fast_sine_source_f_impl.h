@@ -18,37 +18,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_SSB_RX_IMPL_H
-#define INCLUDED_TUJASDR_SSB_RX_IMPL_H
+#ifndef INCLUDED_TUJASDR_FAST_SINE_SOURCE_F_IMPL_H
+#define INCLUDED_TUJASDR_FAST_SINE_SOURCE_F_IMPL_H
 
-#include <tujasdr/ssb_rx.h>
-#include <tujasdr/complex_sum.h>
-// TODO: change agc
-#include <gnuradio/analog/agc2_cc.h>
-#include <gnuradio/analog/agc3_cc.h>
-#include <gnuradio/filter/fft_filter_ccc.h>
+#include <tujasdr/fast_sine_source_f.h>
 
 namespace gr {
     namespace tujasdr {
         
-        class ssb_rx_impl : public ssb_rx
+        class fast_sine_source_f_impl : public fast_sine_source_f
         {
         private:
+            // https://www.vicanek.de/articles/QuadOsc.pdf
             float d_sample_rate;
-            
-            gr::tujasdr::complex_sum::sptr d_complex_sum;
-            // gr::analog::agc2_cc::sptr d_agc2;
-            gr::analog::agc3_cc::sptr d_agc3;
-            gr::filter::fft_filter_ccc::sptr d_fft_filter;
+            float d_frequency;
+            float d_amplitude;
+            float d_v;
+            float d_u;
+            float d_k1;
+            float d_k2;
             
         public:
-            ssb_rx_impl(float sample_rate);
-            ~ssb_rx_impl();
+            fast_sine_source_f_impl(float sample_rate, float frequency, float amplitude);
+            ~fast_sine_source_f_impl();
             
             // Where all the action really happens
+            int work(int noutput_items,
+                     gr_vector_const_void_star &input_items,
+                     gr_vector_void_star &output_items);
         };
         
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_SSB_RX_IMPL_H */
+#endif /* INCLUDED_TUJASDR_FAST_SINE_SOURCE_F_IMPL_H */
+

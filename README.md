@@ -5,7 +5,18 @@ GNURadio blocks for TujaSDR trx
 ## cross compile
 
 ```bash
-cmake -DENABLE_DOXYGEN=OFF -DCMAKE_TOOLCHAIN_FILE=$HOME/src/rbpi3.cmake ../
+# how to update/create sysroot
+rsync -rl --delete-after --safe-links pi@sdr.local:/{lib,usr} $HOME/src/sysroot 
+```
+
+```bash
+# Notes for myself mostly
+sudo chown -R pi:pi /usr/local # not safe but convenient
+mkdir build
+cd build
+cmake -DENABLE_DOXYGEN=OFF -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchains/rbpi3.cmake ..
+sshfs -o allow_other,default_permissions pi@sdr.local:/ /mnt/pi
+make -j4 install DESTDIR=/mnt/pi
 ```
 
 ## blocks

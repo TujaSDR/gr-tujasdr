@@ -31,6 +31,11 @@ namespace gr {
         class alsa_source_impl : public alsa_source
         {
         private:
+            typedef struct {
+                int32_t l;
+                int32_t r;
+            } sample_t;
+            
             snd_pcm_t* d_pcm_handle;
             const unsigned int d_periods;
             const unsigned int d_period_frames;
@@ -38,7 +43,8 @@ namespace gr {
             const unsigned int d_sample_rate;
             const unsigned int d_max_periods_work;
             // TODO: use volk malloc?
-            std::vector<int32_t> d_buf;
+            int32_t *d_buf;
+            //std::vector<int32_t> d_buf;
             
         public:
             alsa_source_impl(unsigned int sample_rate, const std::string& device_name);

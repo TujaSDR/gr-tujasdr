@@ -25,5 +25,9 @@ install(FILES
     tujasdr_mono_source.xml
     tujasdr_opus_encoder_f.xml
     tujasdr_unix_dgram_sink_b.xml
-    tujasdr_complex_to_mag_squared_log_vcb.xml DESTINATION share/gnuradio/grc/blocks
+    tujasdr_complex_to_mag_squared_log_vcb.xml
+    tujasdr_fast_sine_source_c.xml
+    tujasdr_tx_processor_cc.xml
+    tujasdr_fast_sine_source_f.xml
+    tujasdr_single_pole_low_pass_ff.xml DESTINATION share/gnuradio/grc/blocks
 )

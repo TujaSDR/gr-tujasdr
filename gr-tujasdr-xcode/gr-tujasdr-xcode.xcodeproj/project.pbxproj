@@ -10,6 +10,10 @@
 		B142FEDA21C3C631004B55F9 /* opus_encoder_f_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FED821C3C631004B55F9 /* opus_encoder_f_impl.cc */; };
 		B142FEDE21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FEDD21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc */; };
 		B142FEE121C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B142FEDF21C587C0004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc */; };
+		B16513CB21C7E6FD00A11152 /* fast_sine_source_c_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B16513CA21C7E6FC00A11152 /* fast_sine_source_c_impl.cc */; };
+		B16513CF21C8F9A000A11152 /* fast_sine_source_f_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B16513CD21C8F99F00A11152 /* fast_sine_source_f_impl.cc */; };
+		B16513D321C8F9DE00A11152 /* tx_processor_cc_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B16513D121C8F9DE00A11152 /* tx_processor_cc_impl.cc */; };
+		B16513D621C9097F00A11152 /* single_pole_low_pass_ff_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B16513D521C9097F00A11152 /* single_pole_low_pass_ff_impl.cc */; };
 		B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */; };
 		B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5B21BE8F4900E09270 /* mono_sink_impl.cc */; };
 		B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = B173BA5F21BE97DC00E09270 /* ssb_rx_impl.cc */; };
@@ -41,6 +45,18 @@
 		B142FEDF21C587C0004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = complex_to_mag_squared_log_vcb_impl.cc; path = ../../lib/complex_to_mag_squared_log_vcb_impl.cc; sourceTree = "<group>"; };
 		B142FEE021C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_to_mag_squared_log_vcb_impl.h; path = ../../lib/complex_to_mag_squared_log_vcb_impl.h; sourceTree = "<group>"; };
 		B142FEE221C587ED004B55F9 /* complex_to_mag_squared_log_vcb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_to_mag_squared_log_vcb.h; path = ../../include/tujasdr/complex_to_mag_squared_log_vcb.h; sourceTree = "<group>"; };
+		B16513C821C7E5DD00A11152 /* fast_sine_source_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_sine_source_c.h; path = ../../include/tujasdr/fast_sine_source_c.h; sourceTree = "<group>"; };
+		B16513C921C7E6FC00A11152 /* fast_sine_source_c_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_sine_source_c_impl.h; path = ../../lib/fast_sine_source_c_impl.h; sourceTree = "<group>"; };
+		B16513CA21C7E6FC00A11152 /* fast_sine_source_c_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fast_sine_source_c_impl.cc; path = ../../lib/fast_sine_source_c_impl.cc; sourceTree = "<group>"; };
+		B16513CC21C8F99000A11152 /* fast_sine_source_f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_sine_source_f.h; path = ../../include/tujasdr/fast_sine_source_f.h; sourceTree = "<group>"; };
+		B16513CD21C8F99F00A11152 /* fast_sine_source_f_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fast_sine_source_f_impl.cc; path = ../../lib/fast_sine_source_f_impl.cc; sourceTree = "<group>"; };
+		B16513CE21C8F9A000A11152 /* fast_sine_source_f_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_sine_source_f_impl.h; path = ../../lib/fast_sine_source_f_impl.h; sourceTree = "<group>"; };
+		B16513D021C8F9CC00A11152 /* tx_processor_cc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tx_processor_cc.h; path = ../../include/tujasdr/tx_processor_cc.h; sourceTree = "<group>"; };
+		B16513D121C8F9DE00A11152 /* tx_processor_cc_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tx_processor_cc_impl.cc; path = ../../lib/tx_processor_cc_impl.cc; sourceTree = "<group>"; };
+		B16513D221C8F9DE00A11152 /* tx_processor_cc_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tx_processor_cc_impl.h; path = ../../lib/tx_processor_cc_impl.h; sourceTree = "<group>"; };
+		B16513D421C9097F00A11152 /* single_pole_low_pass_ff_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = single_pole_low_pass_ff_impl.h; path = ../../lib/single_pole_low_pass_ff_impl.h; sourceTree = "<group>"; };
+		B16513D521C9097F00A11152 /* single_pole_low_pass_ff_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = single_pole_low_pass_ff_impl.cc; path = ../../lib/single_pole_low_pass_ff_impl.cc; sourceTree = "<group>"; };
+		B16513D721C9098B00A11152 /* single_pole_low_pass_ff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = single_pole_low_pass_ff.h; path = ../../include/tujasdr/single_pole_low_pass_ff.h; sourceTree = "<group>"; };
 		B173BA5721BE81A200E09270 /* alsa_sink_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink_impl.h; path = ../../lib/alsa_sink_impl.h; sourceTree = "<group>"; };
 		B173BA5821BE81A200E09270 /* alsa_sink_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alsa_sink_impl.cc; path = ../../lib/alsa_sink_impl.cc; sourceTree = "<group>"; };
 		B173BA5A21BE81AF00E09270 /* alsa_sink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alsa_sink.h; path = ../../include/tujasdr/alsa_sink.h; sourceTree = "<group>"; };
@@ -133,6 +149,18 @@
 				B142FEE221C587ED004B55F9 /* complex_to_mag_squared_log_vcb.h */,
 				B142FEE021C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.h */,
 				B142FEDF21C587C0004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc */,
+				B16513C821C7E5DD00A11152 /* fast_sine_source_c.h */,
+				B16513C921C7E6FC00A11152 /* fast_sine_source_c_impl.h */,
+				B16513CA21C7E6FC00A11152 /* fast_sine_source_c_impl.cc */,
+				B16513CC21C8F99000A11152 /* fast_sine_source_f.h */,
+				B16513CE21C8F9A000A11152 /* fast_sine_source_f_impl.h */,
+				B16513CD21C8F99F00A11152 /* fast_sine_source_f_impl.cc */,
+				B16513D021C8F9CC00A11152 /* tx_processor_cc.h */,
+				B16513D221C8F9DE00A11152 /* tx_processor_cc_impl.h */,
+				B16513D121C8F9DE00A11152 /* tx_processor_cc_impl.cc */,
+				B16513D721C9098B00A11152 /* single_pole_low_pass_ff.h */,
+				B16513D421C9097F00A11152 /* single_pole_low_pass_ff_impl.h */,
+				B16513D521C9097F00A11152 /* single_pole_low_pass_ff_impl.cc */,
 			);
 			name = alsasink;
 			sourceTree = "<group>";
@@ -193,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B16513CF21C8F9A000A11152 /* fast_sine_source_f_impl.cc in Sources */,
 				B142FEE121C587C1004B55F9 /* complex_to_mag_squared_log_vcb_impl.cc in Sources */,
 				B173BA6621BEA30F00E09270 /* complex_sum_impl.cc in Sources */,
 				B1C5F2C021BFCE2600E7B7CF /* mono_source_impl.cc in Sources */,
@@ -200,7 +229,10 @@
 				B142FEDE21C3D86E004B55F9 /* unix_dgram_sink_b_impl.cc in Sources */,
 				B173BA5921BE81A200E09270 /* alsa_sink_impl.cc in Sources */,
 				B1A36E9321BAD74300FFD0EF /* alsa_source_impl.cc in Sources */,
+				B16513CB21C7E6FD00A11152 /* fast_sine_source_c_impl.cc in Sources */,
+				B16513D621C9097F00A11152 /* single_pole_low_pass_ff_impl.cc in Sources */,
 				B173BA6121BE97DC00E09270 /* ssb_rx_impl.cc in Sources */,
+				B16513D321C8F9DE00A11152 /* tx_processor_cc_impl.cc in Sources */,
 				B142FEDA21C3C631004B55F9 /* opus_encoder_f_impl.cc in Sources */,
 				B173BA5D21BE8F4A00E09270 /* mono_sink_impl.cc in Sources */,
 			);

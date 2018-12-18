@@ -30,5 +30,9 @@ install(FILES
     mono_source.h
     opus_encoder_f.h
     unix_dgram_sink_b.h
-    complex_to_mag_squared_log_vcb.h DESTINATION include/tujasdr
+    complex_to_mag_squared_log_vcb.h
+    fast_sine_source_c.h
+    tx_processor_cc.h
+    fast_sine_source_f.h
+    single_pole_low_pass_ff.h DESTINATION include/tujasdr
 )

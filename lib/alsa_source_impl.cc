@@ -24,6 +24,7 @@
 
 #include <gnuradio/io_signature.h>
 #include <stdexcept>
+#include <complex>
 #include <volk/volk.h>
 #include "alsa_source_impl.h"
 
@@ -41,11 +42,12 @@ namespace gr {
          */
         alsa_source_impl::alsa_source_impl(unsigned int sample_rate, const std::string& device_name)
         : d_pcm_handle(NULL),
-        d_periods(4),
-        d_period_frames(2048),
+        d_periods(2),
+        d_period_frames(1188),
         d_channels(2),
         d_sample_rate(sample_rate),
-        d_max_periods_work(2),
+        d_max_periods_work(1),
+        d_buf(NULL),
         gr::sync_block("alsa_source",
         gr::io_signature::make(0, 0, 0),
                        gr::io_signature::make(1, 1, sizeof(gr_complex)))
@@ -62,10 +64,11 @@ namespace gr {
                 throw std::runtime_error("alsa_pcm_handle");
             }
             
-            // x2 because of complex input
-            d_buf.resize(d_period_frames * d_max_periods_work * 2);
+            //d_buf.resize(d_period_frames * d_max_periods_work * 2);
+            size_t alignment = volk_get_alignment();
+            d_buf = (int32_t*)volk_malloc(2 * sizeof(int32_t) * d_period_frames * d_max_periods_work, alignment);
+            assert(d_buf != NULL);
             
-            // not sure about this
             set_output_multiple(d_period_frames);
         }
         
@@ -75,6 +78,7 @@ namespace gr {
         alsa_source_impl::~alsa_source_impl()
         {
             snd_pcm_close(d_pcm_handle);
+            volk_free(d_buf);
         }
         
         bool
@@ -100,6 +104,8 @@ namespace gr {
             
             //const float scaling_factor = 4294967294.; // S32 = 2^(32-1)-1
             const float scaling_factor = 2147483647.;
+            
+            const float scaling_factor_over_1 = 1./scaling_factor;
             snd_pcm_sframes_t n_err;
             
             //printf("read\n");
@@ -111,7 +117,7 @@ namespace gr {
             }
             
             // Read from ALSA
-            n_err = snd_pcm_readi(d_pcm_handle, d_buf.data(), noutput_items);
+            n_err = snd_pcm_readi(d_pcm_handle, d_buf, noutput_items);
             if (n_err < 0) {
                 // If there was an error try to recover
                 n_err = snd_pcm_recover(d_pcm_handle, (int )n_err, 0);
@@ -122,9 +128,23 @@ namespace gr {
                 }
             }
             
-            // Ok we have read the data, convert it and write it to output buffer
-            // Again, 2*noutput_items because there are two samples / frame.
-            volk_32i_s32f_convert_32f((float*) out, d_buf.data(), scaling_factor, 2 * noutput_items);
+            bool d_tx = true;
+            
+            sample_t *in = (sample_t*) d_buf;
+            
+            if(d_tx) {
+                // TODO: optimize this
+                // Manual conversion
+                for (int n = 0; n<noutput_items; n++) {
+                    // Mic in real, key in imag
+                    //out[n] = gr_complex(in->l * scaling_factor_over_1 * 250, (in->l & 1));
+                    out[n] = gr_complex(in->l * scaling_factor_over_1, (in->l & 1));
+                }
+                printf("%f %08x %08x\n", out[0].real(), d_buf[0], d_buf[1]);
+            } else {
+                // Just use volk x2 because this function deals with float not complex.
+                volk_32i_s32f_convert_32f((float*) out, d_buf, scaling_factor, 2 * noutput_items);
+            }
             
             // Tell runtime system how many output items we produced.
             return noutput_items;

@@ -30,7 +30,7 @@ namespace gr {
         {
         private:
             size_t d_vlen;
-            size_t d_alignment;
+            //size_t d_alignment;
             float *d_mag_squared;
             float *d_log2;
             

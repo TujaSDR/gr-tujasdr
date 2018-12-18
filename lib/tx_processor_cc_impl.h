@@ -18,32 +18,22 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_SSB_RX_IMPL_H
-#define INCLUDED_TUJASDR_SSB_RX_IMPL_H
+#ifndef INCLUDED_TUJASDR_TX_PROCESSOR_CC_IMPL_H
+#define INCLUDED_TUJASDR_TX_PROCESSOR_CC_IMPL_H
 
-#include <tujasdr/ssb_rx.h>
-#include <tujasdr/complex_sum.h>
-// TODO: change agc
-#include <gnuradio/analog/agc2_cc.h>
-#include <gnuradio/analog/agc3_cc.h>
-#include <gnuradio/filter/fft_filter_ccc.h>
+#include <tujasdr/tx_processor_cc.h>
 
 namespace gr {
     namespace tujasdr {
         
-        class ssb_rx_impl : public ssb_rx
+        class tx_processor_cc_impl : public tx_processor_cc
         {
         private:
             float d_sample_rate;
             
-            gr::tujasdr::complex_sum::sptr d_complex_sum;
-            // gr::analog::agc2_cc::sptr d_agc2;
-            gr::analog::agc3_cc::sptr d_agc3;
-            gr::filter::fft_filter_ccc::sptr d_fft_filter;
-            
         public:
-            ssb_rx_impl(float sample_rate);
-            ~ssb_rx_impl();
+            tx_processor_cc_impl(float sample_rate);
+            ~tx_processor_cc_impl();
             
             // Where all the action really happens
         };
@@ -51,4 +41,5 @@ namespace gr {
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_SSB_RX_IMPL_H */
+#endif /* INCLUDED_TUJASDR_TX_PROCESSOR_CC_IMPL_H */
+

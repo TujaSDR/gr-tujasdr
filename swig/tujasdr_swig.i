@@ -17,6 +17,10 @@
 #include "tujasdr/opus_encoder_f.h"
 #include "tujasdr/unix_dgram_sink_b.h"
 #include "tujasdr/complex_to_mag_squared_log_vcb.h"
+#include "tujasdr/fast_sine_source_c.h"
+#include "tujasdr/tx_processor_cc.h"
+#include "tujasdr/fast_sine_source_f.h"
+#include "tujasdr/single_pole_low_pass_ff.h"
 %}
 
 
@@ -39,3 +43,11 @@ GR_SWIG_BLOCK_MAGIC2(tujasdr, opus_encoder_f);
 GR_SWIG_BLOCK_MAGIC2(tujasdr, unix_dgram_sink_b);
 %include "tujasdr/complex_to_mag_squared_log_vcb.h"
 GR_SWIG_BLOCK_MAGIC2(tujasdr, complex_to_mag_squared_log_vcb);
+%include "tujasdr/fast_sine_source_c.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, fast_sine_source_c);
+%include "tujasdr/tx_processor_cc.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, tx_processor_cc);
+%include "tujasdr/fast_sine_source_f.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, fast_sine_source_f);
+%include "tujasdr/single_pole_low_pass_ff.h"
+GR_SWIG_BLOCK_MAGIC2(tujasdr, single_pole_low_pass_ff);

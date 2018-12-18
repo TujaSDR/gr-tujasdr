@@ -42,11 +42,12 @@ namespace gr {
          */
         alsa_sink_impl::alsa_sink_impl(unsigned int sample_rate, const std::string device_name)
         : d_pcm_handle(NULL),
-        d_periods(4),          // reasonable defaults
-        d_period_frames(2048), // seems to be good defaults
+        d_periods(2),          // reasonable defaults
+        d_period_frames(1188), // seems to be good defaults
         d_channels(2),
         d_sample_rate(sample_rate),
-        d_max_periods_work(2),
+        d_max_periods_work(1),
+        d_buf(NULL),
         gr::sync_block("alsa_sink",
                        gr::io_signature::make(1, 1, sizeof(gr_complex)), // input
                        gr::io_signature::make(0, 0, 0)) // output
@@ -64,7 +65,10 @@ namespace gr {
             }
             
             // Complex data 2 samples per frame
-            d_buf.resize(d_period_frames * 2 * 2);
+            //d_buf.resize(d_period_frames * 2 * 2);
+            size_t alignment = volk_get_alignment();
+            d_buf = (int32_t*)volk_malloc(sizeof(int32_t) * d_period_frames * d_max_periods_work * 2, alignment);
+            assert(d_buf != NULL);
             
             // this is helpful for throughput
             set_output_multiple(d_period_frames);
@@ -76,6 +80,7 @@ namespace gr {
         alsa_sink_impl::~alsa_sink_impl()
         {
             snd_pcm_close(d_pcm_handle);
+            volk_free(d_buf);
         }
         
         bool
@@ -109,16 +114,24 @@ namespace gr {
             // printf("alsa_sink_impl::work: %d\n", noutput_items);
             
             // TODO: tune this for best performance
+            // volk_32i_x2_and_32i(int32_t* cVector, const int32_t* aVector, const int32_t* bVector, unsigned int num_points)
             if (noutput_items > d_period_frames * d_max_periods_work) {
                 noutput_items = d_period_frames * d_max_periods_work;
             }
 
             // use volk to convert from float to int32s
             // x2 because this function works on floats
-            volk_32f_s32f_convert_32i(d_buf.data(), (const float*)in, scaling_factor, 2 * noutput_items);
+            volk_32f_s32f_convert_32i(d_buf, (const float*)in, scaling_factor, 2 * noutput_items);
+
+            // TODO: remove this
+            // TODO. maybe change to volk or something
+            // Clear lower 8 bits
+            for(int n = 0; n < 2 * noutput_items; n++) {
+                d_buf[n] &= (uint32_t)0xffffff00;
+            }
             
             // Write to ALSA
-            n_err = snd_pcm_writei(d_pcm_handle, d_buf.data(), noutput_items);
+            n_err = snd_pcm_writei(d_pcm_handle, d_buf, noutput_items);
             if (n_err < 0) {
                 n_err = snd_pcm_recover(d_pcm_handle, (int )n_err, 0);
                 printf("recover!\n");
