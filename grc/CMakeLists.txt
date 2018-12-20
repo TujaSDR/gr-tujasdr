@@ -21,7 +21,7 @@ install(FILES
     tujasdr_alsa_source.xml
     tujasdr_mono_sink.xml
     tujasdr_ssb_rx.xml
-    tujasdr_complex_sum.xml
+    tujasdr_add_real_imag_cc.xml
     tujasdr_mono_source.xml
     tujasdr_opus_encoder_f.xml
     tujasdr_unix_dgram_sink_b.xml
@@ -29,5 +29,8 @@ install(FILES
     tujasdr_fast_sine_source_c.xml
     tujasdr_tx_processor_cc.xml
     tujasdr_fast_sine_source_f.xml
-    tujasdr_single_pole_low_pass_ff.xml DESTINATION share/gnuradio/grc/blocks
+    tujasdr_single_pole_low_pass_ff.xml
+    tujasdr_single_pole_low_pass.xml
+    tujasdr_fast_sine_osc.xml
+    tujasdr_agc_cc.xml DESTINATION share/gnuradio/grc/blocks
 )

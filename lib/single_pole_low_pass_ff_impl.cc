@@ -40,17 +40,13 @@ namespace gr {
          * The private constructor
          */
         single_pole_low_pass_ff_impl::single_pole_low_pass_ff_impl(float sample_rate, float tau)
-        :d_sample_rate(sample_rate),
-        d_tau(tau),
+        : d_lowpass(sample_rate, tau),
+        //d_sample_rate(sample_rate),
+        //d_tau(tau),
         gr::sync_block("single_pole_low_pass_ff",
                        gr::io_signature::make(1, 1, sizeof(float)),
                        gr::io_signature::make(1, 1, sizeof(float)))
-        {
-            float x = std::exp(-1./(d_sample_rate * d_tau));
-            d_a0 = 1 - x;
-            d_b1 = x;
-            d_z1 = 0;
-        }
+        {}
         
         /*
          * Our virtual destructor.
@@ -66,12 +62,7 @@ namespace gr {
         {
             const float *in = (const float *) input_items[0];
             float *out = (float *) output_items[0];
-            
-            // Filter
-            for (int n = 0; n < noutput_items; n++) {
-                out[n] = d_a0 * in[n] + d_b1 * d_z1;
-                d_z1 = out[n];
-            }
+            d_lowpass.filterN(out, in, noutput_items);
             
             // Tell runtime system how many output items we produced.
             return noutput_items;

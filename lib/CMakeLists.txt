@@ -35,7 +35,7 @@ list(APPEND tujasdr_sources
     alsa_source_impl.cc
     mono_sink_impl.cc
     ssb_rx_impl.cc
-    complex_sum_impl.cc
+    add_real_imag_cc_impl.cc
     mono_source_impl.cc
     opus_encoder_f_impl.cc
     unix_dgram_sink_b_impl.cc
@@ -43,7 +43,10 @@ list(APPEND tujasdr_sources
     fast_sine_source_c_impl.cc
     tx_processor_cc_impl.cc
     fast_sine_source_f_impl.cc
-    single_pole_low_pass_ff_impl.cc )
+    single_pole_low_pass_ff_impl.cc
+    single_pole_low_pass.cc
+    fast_sine_osc.cc
+    agc_cc_impl.cc )
 
 set(tujasdr_sources "${tujasdr_sources}" PARENT_SCOPE)
 if(NOT tujasdr_sources)

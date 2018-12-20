@@ -49,7 +49,7 @@ snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
 
     // Set number of channels
     if ((err = snd_pcm_hw_params_set_channels(pcm_handle, hwparams, channels)) < 0) {
-        fprintf(stderr, "snd_pcm_hw_params_set_channels_near: %s\n", snd_strerror(err));
+        fprintf(stderr, "snd_pcm_hw_params_set_channels: %s\n", snd_strerror(err));
         return NULL;
         //exit(EXIT_FAILURE);
     }

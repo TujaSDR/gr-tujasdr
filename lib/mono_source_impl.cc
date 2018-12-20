@@ -42,10 +42,10 @@ namespace gr {
         mono_source_impl::mono_source_impl(unsigned int sample_rate, const std::string device_name)
         :d_pcm_handle(NULL),
         d_periods(5),         // reasonable defaults
-        d_period_frames(960), // seems to be good defaults
+        d_frames_per_period(960), // seems to be good defaults
         d_channels(1),
         d_sample_rate(sample_rate),
-        d_max_periods_work(2),
+        d_max_periods_work(1),
         gr::sync_block("mono_source",
         gr::io_signature::make(0, 0, 0),
                          gr::io_signature::make(1, 1, sizeof(float)))
@@ -54,7 +54,7 @@ namespace gr {
                                            d_channels,
                                            d_sample_rate,
                                            d_periods,
-                                           d_period_frames,
+                                           d_frames_per_period,
                                            SND_PCM_FORMAT_S16,
                                            SND_PCM_STREAM_CAPTURE);
             
@@ -63,9 +63,12 @@ namespace gr {
             }
             
             // Handle at most 2 periods at a time
-            d_buf.resize(d_period_frames * d_max_periods_work);
+            size_t alignment = volk_get_alignment();
+            d_buf = (int16_t*) volk_malloc(sizeof(int16_t) * d_frames_per_period * d_max_periods_work, alignment);
+            assert(d_buf != NULL);
+            
             // This is helpful for throughput
-            set_output_multiple(d_period_frames);
+            set_output_multiple(d_frames_per_period);
         }
         
         /*
@@ -73,6 +76,8 @@ namespace gr {
          */
         mono_source_impl::~mono_source_impl()
         {
+            snd_pcm_close(d_pcm_handle);
+            volk_free(d_buf);
         }
         
         bool
@@ -104,12 +109,12 @@ namespace gr {
             
             // TODO: tune this for best performance
             // Right now we are doing no more than 2 periods / work.
-            if (noutput_items > d_period_frames * d_max_periods_work) {
-                noutput_items = d_period_frames * d_max_periods_work;
+            if (noutput_items > d_frames_per_period * d_max_periods_work) {
+                noutput_items = d_frames_per_period * d_max_periods_work;
             }
             
             // Read from ALSA
-            n_err = snd_pcm_readi(d_pcm_handle, d_buf.data(), noutput_items);
+            n_err = snd_pcm_readi(d_pcm_handle, d_buf, noutput_items);
             if (n_err < 0) {
                 n_err = snd_pcm_recover(d_pcm_handle, (int )n_err, 0);
                 printf("recover!\n");
@@ -120,7 +125,7 @@ namespace gr {
             }
             
             // use volk to convert from float to int16s
-            volk_16i_s32f_convert_32f(out, d_buf.data(), scaling_factor, noutput_items);
+            volk_16i_s32f_convert_32f(out, d_buf, scaling_factor, noutput_items);
             
             // Tell runtime system how many output items we produced.
             return noutput_items;

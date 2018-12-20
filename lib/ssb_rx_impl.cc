@@ -62,13 +62,13 @@ namespace gr {
             //d_agc2 = gr::analog::agc2_cc::make(5e-1, 1e-2, 0.1, 10.0);
             d_agc3 = gr::analog::agc3_cc::make(1e-1, 1e-2, 0.45, 1.0);
             
-            d_complex_sum = gr::tujasdr::complex_sum::make(1);
+            d_add_real_imag = gr::tujasdr::add_real_imag_cc::make();
             
             // connect other blocks
             connect(self(), 0, d_fft_filter, 0);
             connect(d_fft_filter, 0, d_agc3, 0);
-            connect(d_agc3, 0, d_complex_sum, 0);
-            connect(d_complex_sum, 0, self(), 0);
+            connect(d_agc3, 0, d_add_real_imag, 0);
+            connect(d_add_real_imag, 0, self(), 0);
         }
         
         /*

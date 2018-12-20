@@ -26,7 +26,7 @@ install(FILES
     alsa_source.h
     mono_sink.h
     ssb_rx.h
-    complex_sum.h
+    add_real_imag_cc.h
     mono_source.h
     opus_encoder_f.h
     unix_dgram_sink_b.h
@@ -34,5 +34,8 @@ install(FILES
     fast_sine_source_c.h
     tx_processor_cc.h
     fast_sine_source_f.h
-    single_pole_low_pass_ff.h DESTINATION include/tujasdr
+    single_pole_low_pass_ff.h
+    single_pole_low_pass.h
+    fast_sine_osc.h
+    agc_cc.h DESTINATION include/tujasdr
 )

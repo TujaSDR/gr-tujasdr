@@ -18,31 +18,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_TUJASDR_COMPLEX_SUM_IMPL_H
-#define INCLUDED_TUJASDR_COMPLEX_SUM_IMPL_H
 
-#include <tujasdr/complex_sum.h>
+#ifndef INCLUDED_TUJASDR_ADD_REAL_IMAG_CC_H
+#define INCLUDED_TUJASDR_ADD_REAL_IMAG_CC_H
+
+#include <tujasdr/api.h>
+#include <gnuradio/sync_block.h>
 
 namespace gr {
   namespace tujasdr {
 
-    class complex_sum_impl : public complex_sum
+    /*!
+     * \brief <+description of block+>
+     * \ingroup tujasdr
+     *
+     */
+    class TUJASDR_API add_real_imag_cc : virtual public gr::sync_block
     {
-     private:
-        int d_sign;
-
      public:
-      complex_sum_impl(int sign);
-      ~complex_sum_impl();
+      typedef boost::shared_ptr<add_real_imag_cc> sptr;
 
-      // Where all the action really happens
-      int work(int noutput_items,
-         gr_vector_const_void_star &input_items,
-         gr_vector_void_star &output_items);
+      /*!
+       * \brief Return a shared_ptr to a new instance of tujasdr::add_real_imag_cc.
+       *
+       * To avoid accidental use of raw pointers, tujasdr::add_real_imag_cc's
+       * constructor is in a private implementation
+       * class. tujasdr::add_real_imag_cc::make is the public interface for
+       * creating new instances.
+       */
+      static sptr make();
     };
 
   } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_COMPLEX_SUM_IMPL_H */
-
+#endif /* INCLUDED_TUJASDR_ADD_REAL_IMAG_CC_H */

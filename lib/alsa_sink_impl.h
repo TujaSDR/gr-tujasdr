@@ -35,16 +35,18 @@ namespace gr {
         private:
             snd_pcm_t* d_pcm_handle;
             const unsigned int d_periods;
-            const unsigned int d_period_frames;
+            const unsigned int d_frames_per_period;
             const unsigned int d_channels;
             const unsigned int d_sample_rate;
             const unsigned int d_max_periods_work;
             // TODO: use volk malloc instead??
-            int32_t *d_buf;
+            sample32_t *d_buf;
             //std::vector<int32_t> d_buf;
             
         public:
-            alsa_sink_impl(unsigned int sample_rate, const std::string device_name);
+            alsa_sink_impl(unsigned int sample_rate,
+                           const std::string device_name,
+                           unsigned int frames_per_period);
             ~alsa_sink_impl();
 
             // start stop

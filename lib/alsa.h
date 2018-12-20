@@ -8,13 +8,20 @@
 
 #pragma once
 
-#include <stdio.h>
 #include <alsa/asoundlib.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+    
+    // These are very convenient in loops and stuff
+    typedef struct {
+        int32_t l;
+        int32_t r;
+    } sample32_t;
     
     snd_pcm_t* alsa_pcm_handle(const char* pcm_name,
                                unsigned int channels,

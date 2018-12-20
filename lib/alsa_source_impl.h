@@ -22,6 +22,8 @@
 #define INCLUDED_TUJASDR_ALSA_SOURCE_IMPL_H
 
 #include <tujasdr/alsa_source.h>
+#include <tujasdr/single_pole_low_pass.h>
+#include <tujasdr/fast_sine_osc.h>
 
 #include "alsa.h"
 
@@ -31,24 +33,30 @@ namespace gr {
         class alsa_source_impl : public alsa_source
         {
         private:
-            typedef struct {
-                int32_t l;
-                int32_t r;
-            } sample_t;
-            
             snd_pcm_t* d_pcm_handle;
             const unsigned int d_periods;
-            const unsigned int d_period_frames;
+            unsigned int d_frames_per_period;
             const unsigned int d_channels;
             const unsigned int d_sample_rate;
             const unsigned int d_max_periods_work;
-            // TODO: use volk malloc?
-            int32_t *d_buf;
-            //std::vector<int32_t> d_buf;
+            alsa_source_mode_t d_mode;
+            sample32_t *d_buf;
+            
+            // For generating CW
+            kernel::single_pole_low_pass d_lowpass;
+            kernel::fast_sine_osc d_sine_source;
             
         public:
-            alsa_source_impl(unsigned int sample_rate, const std::string& device_name);
+            alsa_source_impl(unsigned int sample_rate,
+                             const std::string& device_name,
+                             unsigned int frames_per_period);
             ~alsa_source_impl();
+            
+            unsigned int frames_per_period() const;
+            void set_frames_per_period(unsigned int frames_per_period);
+
+            alsa_source_mode_t mode() const;
+            void set_mode(alsa_source_mode_t mode);
             
             // start stop
             bool start();

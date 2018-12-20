@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_TUJASDR_ALSA_SINK_H
-#define INCLUDED_TUJASDR_ALSA_SINK_H
+#ifndef INCLUDED_TUJASDR_AGC_CC_H
+#define INCLUDED_TUJASDR_AGC_CC_H
 
 #include <tujasdr/api.h>
 #include <gnuradio/sync_block.h>
@@ -29,31 +29,28 @@ namespace gr {
     namespace tujasdr {
         
         /*!
-         * \brief ALSA sink for TujaSDR board
+         * \brief <+description of block+>
          * \ingroup tujasdr
          *
          */
-        class TUJASDR_API alsa_sink : virtual public gr::sync_block
+        class TUJASDR_API agc_cc : virtual public gr::sync_block
         {
         public:
-            typedef boost::shared_ptr<alsa_sink> sptr;
+            typedef boost::shared_ptr<agc_cc> sptr;
             
             /*!
-             * \brief Return a shared_ptr to a new instance of tujasdr::alsa_sink.
+             * \brief Return a shared_ptr to a new instance of tujasdr::agc_cc.
              *
-             * To avoid accidental use of raw pointers, tujasdr::alsa_sink's
+             * To avoid accidental use of raw pointers, tujasdr::agc_cc's
              * constructor is in a private implementation
-             * class. tujasdr::alsa_sink::make is the public interface for
+             * class. tujasdr::agc_cc::make is the public interface for
              * creating new instances.
              */
-            // TODO: change string to by reference
-            // TODO: change name of blocks to reflect type
-            static sptr make(unsigned int sample_rate,
-                             const std::string device_name = "",
-                             unsigned int frames_per_period = 2048);
+            static sptr make(float attack_rate = 1e-1, float decay_rate = 1e-2, float reference = 1.0, float gain = 1.0, float max_gain = 65536.);
         };
         
     } // namespace tujasdr
 } // namespace gr
 
-#endif /* INCLUDED_TUJASDR_ALSA_SINK_H */
+#endif /* INCLUDED_TUJASDR_AGC_CC_H */
+

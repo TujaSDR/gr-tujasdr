@@ -35,9 +35,9 @@ namespace gr {
             const unsigned int d_channels;
             const unsigned int d_sample_rate;
             const unsigned int d_periods;
-            const unsigned int d_period_frames;
+            const unsigned int d_frames_per_period;
             const unsigned int d_max_periods_work;
-            std::vector<int16_t> d_buf;
+            int16_t *d_buf;
             
         public:
             mono_sink_impl(unsigned int sample_rate, const std::string device_name);

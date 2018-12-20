@@ -31,19 +31,25 @@ namespace gr {
     namespace tujasdr {
         
         alsa_sink::sptr
-        alsa_sink::make(unsigned int sample_rate, const std::string device_name)
+        alsa_sink::make(unsigned int sample_rate,
+                        const std::string device_name,
+                        unsigned int frames_per_period)
         {
             return gnuradio::get_initial_sptr
-            (new alsa_sink_impl(sample_rate, device_name));
+            (new alsa_sink_impl(sample_rate,
+                                device_name,
+                                frames_per_period));
         }
         
         /*
          * The private constructor
          */
-        alsa_sink_impl::alsa_sink_impl(unsigned int sample_rate, const std::string device_name)
+        alsa_sink_impl::alsa_sink_impl(unsigned int sample_rate,
+                                       const std::string device_name,
+                                       unsigned int frames_per_period)
         : d_pcm_handle(NULL),
         d_periods(2),          // reasonable defaults
-        d_period_frames(1188), // seems to be good defaults
+        d_frames_per_period(1188), // seems to be good defaults
         d_channels(2),
         d_sample_rate(sample_rate),
         d_max_periods_work(1),
@@ -56,7 +62,7 @@ namespace gr {
                                            d_channels,
                                            d_sample_rate,
                                            d_periods,
-                                           d_period_frames,
+                                           d_frames_per_period,
                                            SND_PCM_FORMAT_S32,
                                            SND_PCM_STREAM_PLAYBACK);
             
@@ -64,14 +70,12 @@ namespace gr {
                 throw std::runtime_error("alsa_pcm_handle");
             }
             
-            // Complex data 2 samples per frame
-            //d_buf.resize(d_period_frames * 2 * 2);
             size_t alignment = volk_get_alignment();
-            d_buf = (int32_t*)volk_malloc(sizeof(int32_t) * d_period_frames * d_max_periods_work * 2, alignment);
+            d_buf = (sample32_t*)volk_malloc(sizeof(sample32_t) * d_frames_per_period * d_max_periods_work, alignment);
             assert(d_buf != NULL);
             
             // this is helpful for throughput
-            set_output_multiple(d_period_frames);
+            set_output_multiple(d_frames_per_period);
         }
         
         /*
@@ -108,30 +112,20 @@ namespace gr {
         {
             // One complex input
             const gr_complex *in = (const gr_complex *) input_items[0];
-            
             const float scaling_factor = 2147483647.; // S32 = 2^(32-1)-1
             snd_pcm_sframes_t n_err;
             // printf("alsa_sink_impl::work: %d\n", noutput_items);
             
-            // TODO: tune this for best performance
-            // volk_32i_x2_and_32i(int32_t* cVector, const int32_t* aVector, const int32_t* bVector, unsigned int num_points)
-            if (noutput_items > d_period_frames * d_max_periods_work) {
-                noutput_items = d_period_frames * d_max_periods_work;
+            if (noutput_items > d_frames_per_period * d_max_periods_work) {
+                noutput_items = d_frames_per_period * d_max_periods_work;
             }
 
-            // use volk to convert from float to int32s
             // x2 because this function works on floats
-            volk_32f_s32f_convert_32i(d_buf, (const float*)in, scaling_factor, 2 * noutput_items);
-
-            // TODO: remove this
-            // TODO. maybe change to volk or something
-            // Clear lower 8 bits
-            for(int n = 0; n < 2 * noutput_items; n++) {
-                d_buf[n] &= (uint32_t)0xffffff00;
-            }
+            // This function clips the output
+            volk_32f_s32f_convert_32i((int32_t*)d_buf, (const float*)in, scaling_factor, 2 * noutput_items);
             
             // Write to ALSA
-            n_err = snd_pcm_writei(d_pcm_handle, d_buf, noutput_items);
+            n_err = snd_pcm_writei(d_pcm_handle, (int32_t*)d_buf, noutput_items);
             if (n_err < 0) {
                 n_err = snd_pcm_recover(d_pcm_handle, (int )n_err, 0);
                 printf("recover!\n");
@@ -140,6 +134,12 @@ namespace gr {
                     throw std::runtime_error(snd_strerror((int) n_err));
                 }
             }
+            
+            // TODO: debug info
+            // find max
+            //uint16_t max_i = 0;
+            //volk_32fc_index_max_16u(&max_i, (lv_32fc_t*)in, noutput_items);
+            //printf("MAX: %f\n", in[max_i].real());
             
             // Tell runtime system how many output items we consumed?.
             return noutput_items;

@@ -24,58 +24,48 @@
 
 #include <gnuradio/io_signature.h>
 #include <stdexcept>
-#include "complex_sum_impl.h"
+#include "add_real_imag_cc_impl.h"
 
 namespace gr {
     namespace tujasdr {
         
-        complex_sum::sptr
-        complex_sum::make(int sign)
+        add_real_imag_cc::sptr
+        add_real_imag_cc::make()
         {
-            return gnuradio::get_initial_sptr(new complex_sum_impl(sign));
+            return gnuradio::get_initial_sptr(new add_real_imag_cc_impl());
         }
         
         /*
          * The private constructor
          */
-        complex_sum_impl::complex_sum_impl(int sign)
-        : d_sign(sign),
-        gr::sync_block("complex_sum",
-                       gr::io_signature::make(1, 1, sizeof(gr_complex)),
-                       gr::io_signature::make(1, 1, sizeof(gr_complex)))
-        {
-            // TODO
-            if (abs(d_sign) != 1)
-                throw std::runtime_error("sign has to be 1 or -1");
-        }
+        add_real_imag_cc_impl::add_real_imag_cc_impl()
+        : gr::sync_block("add_real_imag_cc",
+                         gr::io_signature::make(1, 1, sizeof(gr_complex)),
+                         gr::io_signature::make(1, 1, sizeof(gr_complex)))
+        { }
         
         /*
          * Our virtual destructor.
          */
-        complex_sum_impl::~complex_sum_impl()
+        add_real_imag_cc_impl::~add_real_imag_cc_impl()
         {
         }
         
         int
-        complex_sum_impl::work(int noutput_items,
-                               gr_vector_const_void_star &input_items,
-                               gr_vector_void_star &output_items)
+        add_real_imag_cc_impl::work(int noutput_items,
+                                    gr_vector_const_void_star &input_items,
+                                    gr_vector_void_star &output_items)
         {
             const gr_complex *in = (const gr_complex *) input_items[0];
             gr_complex *out = (gr_complex *) output_items[0];
             
             // TODO: maybe write a volk kernel
-            // Add or substractc real + imag and put in real which is also the left channel
-            if (d_sign > 0) {
-                for (int n; n < noutput_items; n++) {
-                    out[n] = in[n].real() + in[n].imag();
-                }
-            } else {
-                for (int n; n < noutput_items; n++) {
-                    out[n] = in[n].real() - in[n].imag();
-                }
+            // Add real + imag and put in real
+            // Substract real - imag and put in imag
+            // This is useful for SSB demodulation
+            for (int n = 0; n < noutput_items; n++) {
+                out[n] = gr_complex(in[n].real() + in[n].imag(), 0);
             }
-            
             // Tell runtime system how many output items we produced.
             return noutput_items;
         }

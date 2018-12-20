@@ -28,6 +28,14 @@
 namespace gr {
     namespace tujasdr {
         
+        // Source processing type
+        typedef enum {
+            COMPLEX = 1,
+            KEY_COMPLEX_SINE,
+            KEY_ENVELOPE_IMAG,
+            KEY_ENVELOPE_FILTERED_IMAG
+        } alsa_source_mode_t;
+        
         /*!
          * \brief ALSA source for TujaSDR board
          * \ingroup tujasdr
@@ -46,7 +54,15 @@ namespace gr {
              * class. tujasdr::alsa_source::make is the public interface for
              * creating new instances.
              */
-            static sptr make(unsigned int sample_rate, const std::string& device_name = "");
+            static sptr make(unsigned int sample_rate,
+                             const std::string& device_name = "",
+                             unsigned int frames_per_period = 2048);
+            
+            virtual unsigned int frames_per_period() const = 0;
+            virtual void set_frames_per_period(unsigned int frames_per_period) = 0;
+
+            virtual alsa_source_mode_t mode() const = 0;
+            virtual void set_mode(alsa_source_mode_t mode) = 0;
         };
         
     } // namespace tujasdr

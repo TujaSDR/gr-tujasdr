@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
-  <name>complex_sum</name>
-  <key>tujasdr_complex_sum</key>
+  <name>agc_cc</name>
+  <key>tujasdr_agc_cc</key>
   <category>[tujasdr]</category>
   <import>import tujasdr</import>
-  <make>tujasdr.complex_sum($sign)</make>
+  <make>tujasdr.agc_cc($attack_rate, $decay_rate, $reference, $gain, $max_gain)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name

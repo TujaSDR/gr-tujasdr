@@ -32,31 +32,39 @@ namespace gr {
     namespace tujasdr {
         
         alsa_source::sptr
-        alsa_source::make(unsigned int sample_rate, const std::string& device_name)
+        alsa_source::make(unsigned int sample_rate,
+                          const std::string& device_name,
+                          unsigned int frames_per_period)
         {
-            return gnuradio::get_initial_sptr(new alsa_source_impl(sample_rate, device_name));
+            return gnuradio::get_initial_sptr(new alsa_source_impl(sample_rate, device_name, frames_per_period));
         }
         
         /*
          * The private constructor
          */
-        alsa_source_impl::alsa_source_impl(unsigned int sample_rate, const std::string& device_name)
+        alsa_source_impl::alsa_source_impl(unsigned int sample_rate,
+                                           const std::string& device_name,
+                                           unsigned int frames_per_period)
         : d_pcm_handle(NULL),
         d_periods(2),
-        d_period_frames(1188),
+        d_frames_per_period(frames_per_period),
         d_channels(2),
         d_sample_rate(sample_rate),
         d_max_periods_work(1),
+        d_mode(COMPLEX),
         d_buf(NULL),
+        d_lowpass(sample_rate, 0.002), // tau
+        d_sine_source(sample_rate, 800.0), // freq.
         gr::sync_block("alsa_source",
-        gr::io_signature::make(0, 0, 0),
+                       gr::io_signature::make(0, 0, 0),
                        gr::io_signature::make(1, 1, sizeof(gr_complex)))
         {
+            // Open ALSA device
             d_pcm_handle = alsa_pcm_handle(device_name.c_str(),
                                            d_channels,
                                            d_sample_rate,
                                            d_periods,
-                                           d_period_frames,
+                                           d_frames_per_period,
                                            SND_PCM_FORMAT_S32,
                                            SND_PCM_STREAM_CAPTURE);
             
@@ -64,12 +72,11 @@ namespace gr {
                 throw std::runtime_error("alsa_pcm_handle");
             }
             
-            //d_buf.resize(d_period_frames * d_max_periods_work * 2);
             size_t alignment = volk_get_alignment();
-            d_buf = (int32_t*)volk_malloc(2 * sizeof(int32_t) * d_period_frames * d_max_periods_work, alignment);
+            d_buf = (sample32_t*)volk_malloc(sizeof(sample32_t) * d_frames_per_period * d_max_periods_work, alignment);
             assert(d_buf != NULL);
             
-            set_output_multiple(d_period_frames);
+            set_output_multiple(d_frames_per_period);
         }
         
         /*
@@ -95,6 +102,28 @@ namespace gr {
             return true;
         }
         
+        unsigned int
+        alsa_source_impl::frames_per_period() const {
+            return d_frames_per_period;
+        }
+        
+        void
+        alsa_source_impl::set_frames_per_period(unsigned int frames_per_period) {
+            d_frames_per_period = frames_per_period;
+            // TODO update ALSA!!
+            // throw on error!!
+        }
+        
+        void
+        alsa_source_impl::set_mode(alsa_source_mode_t mode) {
+            d_mode = mode;
+        }
+        
+        alsa_source_mode_t
+        alsa_source_impl::mode() const {
+            return d_mode;
+        }
+        
         int
         alsa_source_impl::work(int noutput_items,
                                gr_vector_const_void_star &input_items,
@@ -104,20 +133,20 @@ namespace gr {
             
             //const float scaling_factor = 4294967294.; // S32 = 2^(32-1)-1
             const float scaling_factor = 2147483647.;
+            const float one_over_scaling_factor = 1. / scaling_factor;
             
-            const float scaling_factor_over_1 = 1./scaling_factor;
             snd_pcm_sframes_t n_err;
             
             //printf("read\n");
             
             // TODO: tune this for best performance
             // For now only read a period
-            if (noutput_items > d_period_frames * d_max_periods_work) {
-                noutput_items = d_period_frames * d_max_periods_work;
+            if (noutput_items > d_frames_per_period * d_max_periods_work) {
+                noutput_items = d_frames_per_period * d_max_periods_work;
             }
             
             // Read from ALSA
-            n_err = snd_pcm_readi(d_pcm_handle, d_buf, noutput_items);
+            n_err = snd_pcm_readi(d_pcm_handle, (int32_t*)d_buf, noutput_items);
             if (n_err < 0) {
                 // If there was an error try to recover
                 n_err = snd_pcm_recover(d_pcm_handle, (int )n_err, 0);
@@ -128,23 +157,59 @@ namespace gr {
                 }
             }
             
-            bool d_tx = true;
-            
-            sample_t *in = (sample_t*) d_buf;
-            
-            if(d_tx) {
-                // TODO: optimize this
-                // Manual conversion
-                for (int n = 0; n<noutput_items; n++) {
-                    // Mic in real, key in imag
-                    //out[n] = gr_complex(in->l * scaling_factor_over_1 * 250, (in->l & 1));
-                    out[n] = gr_complex(in->l * scaling_factor_over_1, (in->l & 1));
+            // Just use volk x2 because this function deals with float not complex.
+            /*volk_32i_s32f_convert_32f((float*) out,
+             (int32_t*)d_buf,
+             scaling_factor, 2 * noutput_items);*/
+
+            switch (d_mode) {
+                case COMPLEX:
+                {
+                    // printf("comp\n");
+                    // Just use volk x2 because this function deals with float not complex.
+                    // TODO: write this kernel
+                    volk_32i_s32f_convert_32f((float*) out,
+                                              (int32_t*)d_buf,
+                                              scaling_factor, 2 * noutput_items);
                 }
-                printf("%f %08x %08x\n", out[0].real(), d_buf[0], d_buf[1]);
-            } else {
-                // Just use volk x2 because this function deals with float not complex.
-                volk_32i_s32f_convert_32f((float*) out, d_buf, scaling_factor, 2 * noutput_items);
+                    break;
+                case KEY_COMPLEX_SINE:
+                {
+                    // printf("sine\n");
+                    // printf("tone\n");
+                    // TODO: better keying filter
+                    // maybe use liquid?
+                    for (int n = 0; n < noutput_items; n++) {
+                        out[n] = d_sine_source.next() * d_lowpass.filter((d_buf[n].l & 1));
+                    }
+                }
+                    break;
+                default:
+                    break;
             }
+            
+                    /*
+                    break;
+                case KEY_ENVELOPE_IMAG:
+                {
+                    // TODO: volk neon optimize
+                    for (int n = 0; n<noutput_items; n++) {
+                        out[n] = gr_complex(d_buf[n].l * one_over_scaling_factor, (d_buf[n].l & 1));
+                    }
+                }
+                    break;
+                case KEY_ENVELOPE_FILTERED_IMAG:
+                {
+                    // TODO: volk neon optimize
+                    for (int n = 0; n<noutput_items; n++) {
+                        out[n] = gr_complex(d_buf[n].l * one_over_scaling_factor,
+                                            d_lowpass.filter(d_buf[n].l & 1));
+                    }
+                }
+                    break;
+                default:
+                    break;*/
+           // }
             
             // Tell runtime system how many output items we produced.
             return noutput_items;
