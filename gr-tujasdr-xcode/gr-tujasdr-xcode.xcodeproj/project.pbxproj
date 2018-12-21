@@ -39,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B112229521CD7F6C00D7265E /* tujavolk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tujavolk.h; path = ../../lib/tujavolk.h; sourceTree = "<group>"; };
 		B142FED721C3C631004B55F9 /* opus_encoder_f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_encoder_f.h; path = ../../include/tujasdr/opus_encoder_f.h; sourceTree = "<group>"; };
 		B142FED821C3C631004B55F9 /* opus_encoder_f_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = opus_encoder_f_impl.cc; path = ../../lib/opus_encoder_f_impl.cc; sourceTree = "<group>"; };
 		B142FED921C3C631004B55F9 /* opus_encoder_f_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_encoder_f_impl.h; path = ../../lib/opus_encoder_f_impl.h; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		B1A36E8721B938EC00FFD0EF /* alsasink */ = {
 			isa = PBXGroup;
 			children = (
+				B112229521CD7F6C00D7265E /* tujavolk.h */,
 				B1A36E8D21B93F3200FFD0EF /* alsa.c */,
 				B1A36E8E21B93F3200FFD0EF /* alsa.h */,
 				B16513DA21CA3F9400A11152 /* add_real_imag_cc.h */,
@@ -377,9 +379,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				OTHER_CFLAGS = (
+					"-D__ARM_FP=1",
+					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
 					"-I/usr/local/Cellar/gnuradio/3.7.13.4_1/include",
 					"-I$(PROJECT_DIR)/../include",
-					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
 					"-I/usr/local/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -391,9 +394,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				OTHER_CFLAGS = (
+					"-D__ARM_FP=1",
+					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
 					"-I/usr/local/Cellar/gnuradio/3.7.13.4_1/include",
 					"-I$(PROJECT_DIR)/../include",
-					"-I/Users/albin/src/alsa-lib-1.1.4.1/include",
 					"-I/usr/local/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

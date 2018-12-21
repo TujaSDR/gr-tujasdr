@@ -31,9 +31,7 @@ namespace gr {
         // Source processing type
         typedef enum {
             COMPLEX = 1,
-            KEY_COMPLEX_SINE,
-            KEY_ENVELOPE_IMAG,
-            KEY_ENVELOPE_FILTERED_IMAG
+            REAL_KEY
         } alsa_source_mode_t;
         
         /*!

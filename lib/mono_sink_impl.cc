@@ -25,6 +25,7 @@
 #include <gnuradio/io_signature.h>
 #include <stdexcept>
 #include <volk/volk.h>
+#include "tujavolk.h"
 #include "mono_sink_impl.h"
 
 namespace gr {
@@ -115,7 +116,7 @@ namespace gr {
                 noutput_items = d_frames_per_period * d_max_periods_work;
             }
 
-            volk_32f_s32f_convert_16i((int16_t*)d_buf, in, scaling_factor, noutput_items);
+            volk_32f_s32f_convert_16i_neon((int16_t*)d_buf, in, scaling_factor, noutput_items);
             
             // Write to ALSA
             n_err = snd_pcm_writei(d_pcm_handle, d_buf, noutput_items);

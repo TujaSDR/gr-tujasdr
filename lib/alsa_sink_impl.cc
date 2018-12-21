@@ -25,6 +25,7 @@
 #include <gnuradio/io_signature.h>
 #include <stdexcept>
 #include <volk/volk.h>
+#include "tujavolk.h"
 #include "alsa_sink_impl.h"
 
 namespace gr {
@@ -122,7 +123,7 @@ namespace gr {
 
             // x2 because this function works on floats
             // This function clips the output
-            volk_32f_s32f_convert_32i((int32_t*)d_buf, (const float*)in, scaling_factor, 2 * noutput_items);
+            volk_32f_s32f_convert_32i_neon((int32_t*)d_buf, (const float*)in, scaling_factor, 2 * noutput_items);
             
             // Write to ALSA
             n_err = snd_pcm_writei(d_pcm_handle, (int32_t*)d_buf, noutput_items);

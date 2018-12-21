@@ -26,6 +26,7 @@
 #include <stdexcept>
 #include <complex>
 #include <volk/volk.h>
+#include "tujavolk.h"
 #include "alsa_source_impl.h"
 
 namespace gr {
@@ -133,7 +134,7 @@ namespace gr {
             
             //const float scaling_factor = 4294967294.; // S32 = 2^(32-1)-1
             const float scaling_factor = 2147483647.;
-            const float one_over_scaling_factor = 1. / scaling_factor;
+            const float recip_scaling_factor = 1. / scaling_factor;
             
             snd_pcm_sframes_t n_err;
             
@@ -161,26 +162,20 @@ namespace gr {
             /*volk_32i_s32f_convert_32f((float*) out,
              (int32_t*)d_buf,
              scaling_factor, 2 * noutput_items);*/
-
+            
             switch (d_mode) {
                 case COMPLEX:
                 {
-                    // printf("comp\n");
-                    // Just use volk x2 because this function deals with float not complex.
-                    // TODO: write this kernel
-                    volk_32i_s32f_convert_32f((float*) out,
-                                              (int32_t*)d_buf,
-                                              scaling_factor, 2 * noutput_items);
+                    volk_32i_s32f_convert_32f_neon((float*) out,
+                                                   (int32_t*)d_buf,
+                                                   scaling_factor, 2 * noutput_items);
                 }
                     break;
-                case KEY_COMPLEX_SINE:
+                case REAL_KEY:
                 {
-                    // printf("sine\n");
-                    // printf("tone\n");
-                    // TODO: better keying filter
-                    // maybe use liquid?
+                    // TODO: Write NEON function for this
                     for (int n = 0; n < noutput_items; n++) {
-                        out[n] = d_sine_source.next() * d_lowpass.filter((d_buf[n].l & 1));
+                        out[n] = gr_complex((float)d_buf[n].l * recip_scaling_factor, (float)(d_buf[n].l & 1));
                     }
                 }
                     break;
@@ -188,28 +183,28 @@ namespace gr {
                     break;
             }
             
-                    /*
-                    break;
-                case KEY_ENVELOPE_IMAG:
-                {
-                    // TODO: volk neon optimize
-                    for (int n = 0; n<noutput_items; n++) {
-                        out[n] = gr_complex(d_buf[n].l * one_over_scaling_factor, (d_buf[n].l & 1));
-                    }
-                }
-                    break;
-                case KEY_ENVELOPE_FILTERED_IMAG:
-                {
-                    // TODO: volk neon optimize
-                    for (int n = 0; n<noutput_items; n++) {
-                        out[n] = gr_complex(d_buf[n].l * one_over_scaling_factor,
-                                            d_lowpass.filter(d_buf[n].l & 1));
-                    }
-                }
-                    break;
-                default:
-                    break;*/
-           // }
+            /*
+             break;
+             case KEY_ENVELOPE_IMAG:
+             {
+             // TODO: volk neon optimize
+             for (int n = 0; n<noutput_items; n++) {
+             out[n] = gr_complex(d_buf[n].l * one_over_scaling_factor, (d_buf[n].l & 1));
+             }
+             }
+             break;
+             case KEY_ENVELOPE_FILTERED_IMAG:
+             {
+             // TODO: volk neon optimize
+             for (int n = 0; n<noutput_items; n++) {
+             out[n] = gr_complex(d_buf[n].l * one_over_scaling_factor,
+             d_lowpass.filter(d_buf[n].l & 1));
+             }
+             }
+             break;
+             default:
+             break;*/
+            // }
             
             // Tell runtime system how many output items we produced.
             return noutput_items;
